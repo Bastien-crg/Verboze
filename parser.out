@@ -1,0 +1,1007 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> expression
+Rule 1     expression -> logical_or
+Rule 2     logical_or -> logical_or OR logical_and
+Rule 3     logical_or -> logical_and
+Rule 4     logical_and -> logical_and AND equality
+Rule 5     logical_and -> equality
+Rule 6     equality -> equality EQUAL relational
+Rule 7     equality -> equality NE relational
+Rule 8     equality -> relational
+Rule 9     relational -> relational LTE additive
+Rule 10    relational -> relational GTE additive
+Rule 11    relational -> relational LT additive
+Rule 12    relational -> relational GT additive
+Rule 13    relational -> additive
+Rule 14    additive -> additive MINUS multiplicative
+Rule 15    additive -> additive PLUS multiplicative
+Rule 16    additive -> multiplicative
+Rule 17    multiplicative -> multiplicative TIMES unary
+Rule 18    multiplicative -> multiplicative DIVIDE unary
+Rule 19    multiplicative -> unary
+Rule 20    unary -> MINUS unary
+Rule 21    unary -> NOT unary
+Rule 22    unary -> primary
+Rule 23    primary -> BOOLEAN
+Rule 24    primary -> LPAREN expression RPAREN
+Rule 25    primary -> NUMBER
+
+Terminals, with rules where they appear
+
+AND                  : 4
+BOOLEAN              : 23
+DIVIDE               : 18
+EQUAL                : 6
+GT                   : 12
+GTE                  : 10
+LPAREN               : 24
+LT                   : 11
+LTE                  : 9
+MINUS                : 14 20
+NE                   : 7
+NOT                  : 21
+NUMBER               : 25
+OR                   : 2
+PLUS                 : 15
+RPAREN               : 24
+TIMES                : 17
+error                : 
+
+Nonterminals, with rules where they appear
+
+additive             : 9 10 11 12 13 14 15
+equality             : 4 5 6 7
+expression           : 24 0
+logical_and          : 2 3 4
+logical_or           : 1 2
+multiplicative       : 14 15 16 17 18
+primary              : 22
+relational           : 6 7 8 9 10 11 12
+unary                : 17 18 19 20 21
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expression
+    (1) expression -> . logical_or
+    (2) logical_or -> . logical_or OR logical_and
+    (3) logical_or -> . logical_and
+    (4) logical_and -> . logical_and AND equality
+    (5) logical_and -> . equality
+    (6) equality -> . equality EQUAL relational
+    (7) equality -> . equality NE relational
+    (8) equality -> . relational
+    (9) relational -> . relational LTE additive
+    (10) relational -> . relational GTE additive
+    (11) relational -> . relational LT additive
+    (12) relational -> . relational GT additive
+    (13) relational -> . additive
+    (14) additive -> . additive MINUS multiplicative
+    (15) additive -> . additive PLUS multiplicative
+    (16) additive -> . multiplicative
+    (17) multiplicative -> . multiplicative TIMES unary
+    (18) multiplicative -> . multiplicative DIVIDE unary
+    (19) multiplicative -> . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    expression                     shift and go to state 1
+    logical_or                     shift and go to state 2
+    logical_and                    shift and go to state 3
+    equality                       shift and go to state 4
+    relational                     shift and go to state 5
+    additive                       shift and go to state 6
+    multiplicative                 shift and go to state 8
+    unary                          shift and go to state 9
+    primary                        shift and go to state 11
+
+state 1
+
+    (0) S' -> expression .
+
+
+
+state 2
+
+    (1) expression -> logical_or .
+    (2) logical_or -> logical_or . OR logical_and
+
+    $end            reduce using rule 1 (expression -> logical_or .)
+    RPAREN          reduce using rule 1 (expression -> logical_or .)
+    OR              shift and go to state 15
+
+
+state 3
+
+    (3) logical_or -> logical_and .
+    (4) logical_and -> logical_and . AND equality
+
+    OR              reduce using rule 3 (logical_or -> logical_and .)
+    $end            reduce using rule 3 (logical_or -> logical_and .)
+    RPAREN          reduce using rule 3 (logical_or -> logical_and .)
+    AND             shift and go to state 16
+
+
+state 4
+
+    (5) logical_and -> equality .
+    (6) equality -> equality . EQUAL relational
+    (7) equality -> equality . NE relational
+
+    AND             reduce using rule 5 (logical_and -> equality .)
+    OR              reduce using rule 5 (logical_and -> equality .)
+    $end            reduce using rule 5 (logical_and -> equality .)
+    RPAREN          reduce using rule 5 (logical_and -> equality .)
+    EQUAL           shift and go to state 17
+    NE              shift and go to state 18
+
+
+state 5
+
+    (8) equality -> relational .
+    (9) relational -> relational . LTE additive
+    (10) relational -> relational . GTE additive
+    (11) relational -> relational . LT additive
+    (12) relational -> relational . GT additive
+
+    EQUAL           reduce using rule 8 (equality -> relational .)
+    NE              reduce using rule 8 (equality -> relational .)
+    AND             reduce using rule 8 (equality -> relational .)
+    OR              reduce using rule 8 (equality -> relational .)
+    $end            reduce using rule 8 (equality -> relational .)
+    RPAREN          reduce using rule 8 (equality -> relational .)
+    LTE             shift and go to state 19
+    GTE             shift and go to state 20
+    LT              shift and go to state 21
+    GT              shift and go to state 22
+
+
+state 6
+
+    (13) relational -> additive .
+    (14) additive -> additive . MINUS multiplicative
+    (15) additive -> additive . PLUS multiplicative
+
+    LTE             reduce using rule 13 (relational -> additive .)
+    GTE             reduce using rule 13 (relational -> additive .)
+    LT              reduce using rule 13 (relational -> additive .)
+    GT              reduce using rule 13 (relational -> additive .)
+    EQUAL           reduce using rule 13 (relational -> additive .)
+    NE              reduce using rule 13 (relational -> additive .)
+    AND             reduce using rule 13 (relational -> additive .)
+    OR              reduce using rule 13 (relational -> additive .)
+    $end            reduce using rule 13 (relational -> additive .)
+    RPAREN          reduce using rule 13 (relational -> additive .)
+    MINUS           shift and go to state 23
+    PLUS            shift and go to state 24
+
+
+state 7
+
+    (20) unary -> MINUS . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    unary                          shift and go to state 25
+    primary                        shift and go to state 11
+
+state 8
+
+    (16) additive -> multiplicative .
+    (17) multiplicative -> multiplicative . TIMES unary
+    (18) multiplicative -> multiplicative . DIVIDE unary
+
+    MINUS           reduce using rule 16 (additive -> multiplicative .)
+    PLUS            reduce using rule 16 (additive -> multiplicative .)
+    LTE             reduce using rule 16 (additive -> multiplicative .)
+    GTE             reduce using rule 16 (additive -> multiplicative .)
+    LT              reduce using rule 16 (additive -> multiplicative .)
+    GT              reduce using rule 16 (additive -> multiplicative .)
+    EQUAL           reduce using rule 16 (additive -> multiplicative .)
+    NE              reduce using rule 16 (additive -> multiplicative .)
+    AND             reduce using rule 16 (additive -> multiplicative .)
+    OR              reduce using rule 16 (additive -> multiplicative .)
+    $end            reduce using rule 16 (additive -> multiplicative .)
+    RPAREN          reduce using rule 16 (additive -> multiplicative .)
+    TIMES           shift and go to state 26
+    DIVIDE          shift and go to state 27
+
+
+state 9
+
+    (19) multiplicative -> unary .
+
+    TIMES           reduce using rule 19 (multiplicative -> unary .)
+    DIVIDE          reduce using rule 19 (multiplicative -> unary .)
+    MINUS           reduce using rule 19 (multiplicative -> unary .)
+    PLUS            reduce using rule 19 (multiplicative -> unary .)
+    LTE             reduce using rule 19 (multiplicative -> unary .)
+    GTE             reduce using rule 19 (multiplicative -> unary .)
+    LT              reduce using rule 19 (multiplicative -> unary .)
+    GT              reduce using rule 19 (multiplicative -> unary .)
+    EQUAL           reduce using rule 19 (multiplicative -> unary .)
+    NE              reduce using rule 19 (multiplicative -> unary .)
+    AND             reduce using rule 19 (multiplicative -> unary .)
+    OR              reduce using rule 19 (multiplicative -> unary .)
+    $end            reduce using rule 19 (multiplicative -> unary .)
+    RPAREN          reduce using rule 19 (multiplicative -> unary .)
+
+
+state 10
+
+    (21) unary -> NOT . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    unary                          shift and go to state 28
+    primary                        shift and go to state 11
+
+state 11
+
+    (22) unary -> primary .
+
+    TIMES           reduce using rule 22 (unary -> primary .)
+    DIVIDE          reduce using rule 22 (unary -> primary .)
+    MINUS           reduce using rule 22 (unary -> primary .)
+    PLUS            reduce using rule 22 (unary -> primary .)
+    LTE             reduce using rule 22 (unary -> primary .)
+    GTE             reduce using rule 22 (unary -> primary .)
+    LT              reduce using rule 22 (unary -> primary .)
+    GT              reduce using rule 22 (unary -> primary .)
+    EQUAL           reduce using rule 22 (unary -> primary .)
+    NE              reduce using rule 22 (unary -> primary .)
+    AND             reduce using rule 22 (unary -> primary .)
+    OR              reduce using rule 22 (unary -> primary .)
+    $end            reduce using rule 22 (unary -> primary .)
+    RPAREN          reduce using rule 22 (unary -> primary .)
+
+
+state 12
+
+    (23) primary -> BOOLEAN .
+
+    TIMES           reduce using rule 23 (primary -> BOOLEAN .)
+    DIVIDE          reduce using rule 23 (primary -> BOOLEAN .)
+    MINUS           reduce using rule 23 (primary -> BOOLEAN .)
+    PLUS            reduce using rule 23 (primary -> BOOLEAN .)
+    LTE             reduce using rule 23 (primary -> BOOLEAN .)
+    GTE             reduce using rule 23 (primary -> BOOLEAN .)
+    LT              reduce using rule 23 (primary -> BOOLEAN .)
+    GT              reduce using rule 23 (primary -> BOOLEAN .)
+    EQUAL           reduce using rule 23 (primary -> BOOLEAN .)
+    NE              reduce using rule 23 (primary -> BOOLEAN .)
+    AND             reduce using rule 23 (primary -> BOOLEAN .)
+    OR              reduce using rule 23 (primary -> BOOLEAN .)
+    $end            reduce using rule 23 (primary -> BOOLEAN .)
+    RPAREN          reduce using rule 23 (primary -> BOOLEAN .)
+
+
+state 13
+
+    (24) primary -> LPAREN . expression RPAREN
+    (1) expression -> . logical_or
+    (2) logical_or -> . logical_or OR logical_and
+    (3) logical_or -> . logical_and
+    (4) logical_and -> . logical_and AND equality
+    (5) logical_and -> . equality
+    (6) equality -> . equality EQUAL relational
+    (7) equality -> . equality NE relational
+    (8) equality -> . relational
+    (9) relational -> . relational LTE additive
+    (10) relational -> . relational GTE additive
+    (11) relational -> . relational LT additive
+    (12) relational -> . relational GT additive
+    (13) relational -> . additive
+    (14) additive -> . additive MINUS multiplicative
+    (15) additive -> . additive PLUS multiplicative
+    (16) additive -> . multiplicative
+    (17) multiplicative -> . multiplicative TIMES unary
+    (18) multiplicative -> . multiplicative DIVIDE unary
+    (19) multiplicative -> . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    expression                     shift and go to state 29
+    logical_or                     shift and go to state 2
+    logical_and                    shift and go to state 3
+    equality                       shift and go to state 4
+    relational                     shift and go to state 5
+    additive                       shift and go to state 6
+    multiplicative                 shift and go to state 8
+    unary                          shift and go to state 9
+    primary                        shift and go to state 11
+
+state 14
+
+    (25) primary -> NUMBER .
+
+    TIMES           reduce using rule 25 (primary -> NUMBER .)
+    DIVIDE          reduce using rule 25 (primary -> NUMBER .)
+    MINUS           reduce using rule 25 (primary -> NUMBER .)
+    PLUS            reduce using rule 25 (primary -> NUMBER .)
+    LTE             reduce using rule 25 (primary -> NUMBER .)
+    GTE             reduce using rule 25 (primary -> NUMBER .)
+    LT              reduce using rule 25 (primary -> NUMBER .)
+    GT              reduce using rule 25 (primary -> NUMBER .)
+    EQUAL           reduce using rule 25 (primary -> NUMBER .)
+    NE              reduce using rule 25 (primary -> NUMBER .)
+    AND             reduce using rule 25 (primary -> NUMBER .)
+    OR              reduce using rule 25 (primary -> NUMBER .)
+    $end            reduce using rule 25 (primary -> NUMBER .)
+    RPAREN          reduce using rule 25 (primary -> NUMBER .)
+
+
+state 15
+
+    (2) logical_or -> logical_or OR . logical_and
+    (4) logical_and -> . logical_and AND equality
+    (5) logical_and -> . equality
+    (6) equality -> . equality EQUAL relational
+    (7) equality -> . equality NE relational
+    (8) equality -> . relational
+    (9) relational -> . relational LTE additive
+    (10) relational -> . relational GTE additive
+    (11) relational -> . relational LT additive
+    (12) relational -> . relational GT additive
+    (13) relational -> . additive
+    (14) additive -> . additive MINUS multiplicative
+    (15) additive -> . additive PLUS multiplicative
+    (16) additive -> . multiplicative
+    (17) multiplicative -> . multiplicative TIMES unary
+    (18) multiplicative -> . multiplicative DIVIDE unary
+    (19) multiplicative -> . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    logical_and                    shift and go to state 30
+    equality                       shift and go to state 4
+    relational                     shift and go to state 5
+    additive                       shift and go to state 6
+    multiplicative                 shift and go to state 8
+    unary                          shift and go to state 9
+    primary                        shift and go to state 11
+
+state 16
+
+    (4) logical_and -> logical_and AND . equality
+    (6) equality -> . equality EQUAL relational
+    (7) equality -> . equality NE relational
+    (8) equality -> . relational
+    (9) relational -> . relational LTE additive
+    (10) relational -> . relational GTE additive
+    (11) relational -> . relational LT additive
+    (12) relational -> . relational GT additive
+    (13) relational -> . additive
+    (14) additive -> . additive MINUS multiplicative
+    (15) additive -> . additive PLUS multiplicative
+    (16) additive -> . multiplicative
+    (17) multiplicative -> . multiplicative TIMES unary
+    (18) multiplicative -> . multiplicative DIVIDE unary
+    (19) multiplicative -> . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    equality                       shift and go to state 31
+    relational                     shift and go to state 5
+    additive                       shift and go to state 6
+    multiplicative                 shift and go to state 8
+    unary                          shift and go to state 9
+    primary                        shift and go to state 11
+
+state 17
+
+    (6) equality -> equality EQUAL . relational
+    (9) relational -> . relational LTE additive
+    (10) relational -> . relational GTE additive
+    (11) relational -> . relational LT additive
+    (12) relational -> . relational GT additive
+    (13) relational -> . additive
+    (14) additive -> . additive MINUS multiplicative
+    (15) additive -> . additive PLUS multiplicative
+    (16) additive -> . multiplicative
+    (17) multiplicative -> . multiplicative TIMES unary
+    (18) multiplicative -> . multiplicative DIVIDE unary
+    (19) multiplicative -> . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    relational                     shift and go to state 32
+    additive                       shift and go to state 6
+    multiplicative                 shift and go to state 8
+    unary                          shift and go to state 9
+    primary                        shift and go to state 11
+
+state 18
+
+    (7) equality -> equality NE . relational
+    (9) relational -> . relational LTE additive
+    (10) relational -> . relational GTE additive
+    (11) relational -> . relational LT additive
+    (12) relational -> . relational GT additive
+    (13) relational -> . additive
+    (14) additive -> . additive MINUS multiplicative
+    (15) additive -> . additive PLUS multiplicative
+    (16) additive -> . multiplicative
+    (17) multiplicative -> . multiplicative TIMES unary
+    (18) multiplicative -> . multiplicative DIVIDE unary
+    (19) multiplicative -> . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    relational                     shift and go to state 33
+    additive                       shift and go to state 6
+    multiplicative                 shift and go to state 8
+    unary                          shift and go to state 9
+    primary                        shift and go to state 11
+
+state 19
+
+    (9) relational -> relational LTE . additive
+    (14) additive -> . additive MINUS multiplicative
+    (15) additive -> . additive PLUS multiplicative
+    (16) additive -> . multiplicative
+    (17) multiplicative -> . multiplicative TIMES unary
+    (18) multiplicative -> . multiplicative DIVIDE unary
+    (19) multiplicative -> . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    additive                       shift and go to state 34
+    multiplicative                 shift and go to state 8
+    unary                          shift and go to state 9
+    primary                        shift and go to state 11
+
+state 20
+
+    (10) relational -> relational GTE . additive
+    (14) additive -> . additive MINUS multiplicative
+    (15) additive -> . additive PLUS multiplicative
+    (16) additive -> . multiplicative
+    (17) multiplicative -> . multiplicative TIMES unary
+    (18) multiplicative -> . multiplicative DIVIDE unary
+    (19) multiplicative -> . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    additive                       shift and go to state 35
+    multiplicative                 shift and go to state 8
+    unary                          shift and go to state 9
+    primary                        shift and go to state 11
+
+state 21
+
+    (11) relational -> relational LT . additive
+    (14) additive -> . additive MINUS multiplicative
+    (15) additive -> . additive PLUS multiplicative
+    (16) additive -> . multiplicative
+    (17) multiplicative -> . multiplicative TIMES unary
+    (18) multiplicative -> . multiplicative DIVIDE unary
+    (19) multiplicative -> . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    additive                       shift and go to state 36
+    multiplicative                 shift and go to state 8
+    unary                          shift and go to state 9
+    primary                        shift and go to state 11
+
+state 22
+
+    (12) relational -> relational GT . additive
+    (14) additive -> . additive MINUS multiplicative
+    (15) additive -> . additive PLUS multiplicative
+    (16) additive -> . multiplicative
+    (17) multiplicative -> . multiplicative TIMES unary
+    (18) multiplicative -> . multiplicative DIVIDE unary
+    (19) multiplicative -> . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    additive                       shift and go to state 37
+    multiplicative                 shift and go to state 8
+    unary                          shift and go to state 9
+    primary                        shift and go to state 11
+
+state 23
+
+    (14) additive -> additive MINUS . multiplicative
+    (17) multiplicative -> . multiplicative TIMES unary
+    (18) multiplicative -> . multiplicative DIVIDE unary
+    (19) multiplicative -> . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    multiplicative                 shift and go to state 38
+    unary                          shift and go to state 9
+    primary                        shift and go to state 11
+
+state 24
+
+    (15) additive -> additive PLUS . multiplicative
+    (17) multiplicative -> . multiplicative TIMES unary
+    (18) multiplicative -> . multiplicative DIVIDE unary
+    (19) multiplicative -> . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    multiplicative                 shift and go to state 39
+    unary                          shift and go to state 9
+    primary                        shift and go to state 11
+
+state 25
+
+    (20) unary -> MINUS unary .
+
+    TIMES           reduce using rule 20 (unary -> MINUS unary .)
+    DIVIDE          reduce using rule 20 (unary -> MINUS unary .)
+    MINUS           reduce using rule 20 (unary -> MINUS unary .)
+    PLUS            reduce using rule 20 (unary -> MINUS unary .)
+    LTE             reduce using rule 20 (unary -> MINUS unary .)
+    GTE             reduce using rule 20 (unary -> MINUS unary .)
+    LT              reduce using rule 20 (unary -> MINUS unary .)
+    GT              reduce using rule 20 (unary -> MINUS unary .)
+    EQUAL           reduce using rule 20 (unary -> MINUS unary .)
+    NE              reduce using rule 20 (unary -> MINUS unary .)
+    AND             reduce using rule 20 (unary -> MINUS unary .)
+    OR              reduce using rule 20 (unary -> MINUS unary .)
+    $end            reduce using rule 20 (unary -> MINUS unary .)
+    RPAREN          reduce using rule 20 (unary -> MINUS unary .)
+
+
+state 26
+
+    (17) multiplicative -> multiplicative TIMES . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    unary                          shift and go to state 40
+    primary                        shift and go to state 11
+
+state 27
+
+    (18) multiplicative -> multiplicative DIVIDE . unary
+    (20) unary -> . MINUS unary
+    (21) unary -> . NOT unary
+    (22) unary -> . primary
+    (23) primary -> . BOOLEAN
+    (24) primary -> . LPAREN expression RPAREN
+    (25) primary -> . NUMBER
+
+    MINUS           shift and go to state 7
+    NOT             shift and go to state 10
+    BOOLEAN         shift and go to state 12
+    LPAREN          shift and go to state 13
+    NUMBER          shift and go to state 14
+
+    unary                          shift and go to state 41
+    primary                        shift and go to state 11
+
+state 28
+
+    (21) unary -> NOT unary .
+
+    TIMES           reduce using rule 21 (unary -> NOT unary .)
+    DIVIDE          reduce using rule 21 (unary -> NOT unary .)
+    MINUS           reduce using rule 21 (unary -> NOT unary .)
+    PLUS            reduce using rule 21 (unary -> NOT unary .)
+    LTE             reduce using rule 21 (unary -> NOT unary .)
+    GTE             reduce using rule 21 (unary -> NOT unary .)
+    LT              reduce using rule 21 (unary -> NOT unary .)
+    GT              reduce using rule 21 (unary -> NOT unary .)
+    EQUAL           reduce using rule 21 (unary -> NOT unary .)
+    NE              reduce using rule 21 (unary -> NOT unary .)
+    AND             reduce using rule 21 (unary -> NOT unary .)
+    OR              reduce using rule 21 (unary -> NOT unary .)
+    $end            reduce using rule 21 (unary -> NOT unary .)
+    RPAREN          reduce using rule 21 (unary -> NOT unary .)
+
+
+state 29
+
+    (24) primary -> LPAREN expression . RPAREN
+
+    RPAREN          shift and go to state 42
+
+
+state 30
+
+    (2) logical_or -> logical_or OR logical_and .
+    (4) logical_and -> logical_and . AND equality
+
+    OR              reduce using rule 2 (logical_or -> logical_or OR logical_and .)
+    $end            reduce using rule 2 (logical_or -> logical_or OR logical_and .)
+    RPAREN          reduce using rule 2 (logical_or -> logical_or OR logical_and .)
+    AND             shift and go to state 16
+
+
+state 31
+
+    (4) logical_and -> logical_and AND equality .
+    (6) equality -> equality . EQUAL relational
+    (7) equality -> equality . NE relational
+
+    AND             reduce using rule 4 (logical_and -> logical_and AND equality .)
+    OR              reduce using rule 4 (logical_and -> logical_and AND equality .)
+    $end            reduce using rule 4 (logical_and -> logical_and AND equality .)
+    RPAREN          reduce using rule 4 (logical_and -> logical_and AND equality .)
+    EQUAL           shift and go to state 17
+    NE              shift and go to state 18
+
+
+state 32
+
+    (6) equality -> equality EQUAL relational .
+    (9) relational -> relational . LTE additive
+    (10) relational -> relational . GTE additive
+    (11) relational -> relational . LT additive
+    (12) relational -> relational . GT additive
+
+    EQUAL           reduce using rule 6 (equality -> equality EQUAL relational .)
+    NE              reduce using rule 6 (equality -> equality EQUAL relational .)
+    AND             reduce using rule 6 (equality -> equality EQUAL relational .)
+    OR              reduce using rule 6 (equality -> equality EQUAL relational .)
+    $end            reduce using rule 6 (equality -> equality EQUAL relational .)
+    RPAREN          reduce using rule 6 (equality -> equality EQUAL relational .)
+    LTE             shift and go to state 19
+    GTE             shift and go to state 20
+    LT              shift and go to state 21
+    GT              shift and go to state 22
+
+
+state 33
+
+    (7) equality -> equality NE relational .
+    (9) relational -> relational . LTE additive
+    (10) relational -> relational . GTE additive
+    (11) relational -> relational . LT additive
+    (12) relational -> relational . GT additive
+
+    EQUAL           reduce using rule 7 (equality -> equality NE relational .)
+    NE              reduce using rule 7 (equality -> equality NE relational .)
+    AND             reduce using rule 7 (equality -> equality NE relational .)
+    OR              reduce using rule 7 (equality -> equality NE relational .)
+    $end            reduce using rule 7 (equality -> equality NE relational .)
+    RPAREN          reduce using rule 7 (equality -> equality NE relational .)
+    LTE             shift and go to state 19
+    GTE             shift and go to state 20
+    LT              shift and go to state 21
+    GT              shift and go to state 22
+
+
+state 34
+
+    (9) relational -> relational LTE additive .
+    (14) additive -> additive . MINUS multiplicative
+    (15) additive -> additive . PLUS multiplicative
+
+    LTE             reduce using rule 9 (relational -> relational LTE additive .)
+    GTE             reduce using rule 9 (relational -> relational LTE additive .)
+    LT              reduce using rule 9 (relational -> relational LTE additive .)
+    GT              reduce using rule 9 (relational -> relational LTE additive .)
+    EQUAL           reduce using rule 9 (relational -> relational LTE additive .)
+    NE              reduce using rule 9 (relational -> relational LTE additive .)
+    AND             reduce using rule 9 (relational -> relational LTE additive .)
+    OR              reduce using rule 9 (relational -> relational LTE additive .)
+    $end            reduce using rule 9 (relational -> relational LTE additive .)
+    RPAREN          reduce using rule 9 (relational -> relational LTE additive .)
+    MINUS           shift and go to state 23
+    PLUS            shift and go to state 24
+
+
+state 35
+
+    (10) relational -> relational GTE additive .
+    (14) additive -> additive . MINUS multiplicative
+    (15) additive -> additive . PLUS multiplicative
+
+    LTE             reduce using rule 10 (relational -> relational GTE additive .)
+    GTE             reduce using rule 10 (relational -> relational GTE additive .)
+    LT              reduce using rule 10 (relational -> relational GTE additive .)
+    GT              reduce using rule 10 (relational -> relational GTE additive .)
+    EQUAL           reduce using rule 10 (relational -> relational GTE additive .)
+    NE              reduce using rule 10 (relational -> relational GTE additive .)
+    AND             reduce using rule 10 (relational -> relational GTE additive .)
+    OR              reduce using rule 10 (relational -> relational GTE additive .)
+    $end            reduce using rule 10 (relational -> relational GTE additive .)
+    RPAREN          reduce using rule 10 (relational -> relational GTE additive .)
+    MINUS           shift and go to state 23
+    PLUS            shift and go to state 24
+
+
+state 36
+
+    (11) relational -> relational LT additive .
+    (14) additive -> additive . MINUS multiplicative
+    (15) additive -> additive . PLUS multiplicative
+
+    LTE             reduce using rule 11 (relational -> relational LT additive .)
+    GTE             reduce using rule 11 (relational -> relational LT additive .)
+    LT              reduce using rule 11 (relational -> relational LT additive .)
+    GT              reduce using rule 11 (relational -> relational LT additive .)
+    EQUAL           reduce using rule 11 (relational -> relational LT additive .)
+    NE              reduce using rule 11 (relational -> relational LT additive .)
+    AND             reduce using rule 11 (relational -> relational LT additive .)
+    OR              reduce using rule 11 (relational -> relational LT additive .)
+    $end            reduce using rule 11 (relational -> relational LT additive .)
+    RPAREN          reduce using rule 11 (relational -> relational LT additive .)
+    MINUS           shift and go to state 23
+    PLUS            shift and go to state 24
+
+
+state 37
+
+    (12) relational -> relational GT additive .
+    (14) additive -> additive . MINUS multiplicative
+    (15) additive -> additive . PLUS multiplicative
+
+    LTE             reduce using rule 12 (relational -> relational GT additive .)
+    GTE             reduce using rule 12 (relational -> relational GT additive .)
+    LT              reduce using rule 12 (relational -> relational GT additive .)
+    GT              reduce using rule 12 (relational -> relational GT additive .)
+    EQUAL           reduce using rule 12 (relational -> relational GT additive .)
+    NE              reduce using rule 12 (relational -> relational GT additive .)
+    AND             reduce using rule 12 (relational -> relational GT additive .)
+    OR              reduce using rule 12 (relational -> relational GT additive .)
+    $end            reduce using rule 12 (relational -> relational GT additive .)
+    RPAREN          reduce using rule 12 (relational -> relational GT additive .)
+    MINUS           shift and go to state 23
+    PLUS            shift and go to state 24
+
+
+state 38
+
+    (14) additive -> additive MINUS multiplicative .
+    (17) multiplicative -> multiplicative . TIMES unary
+    (18) multiplicative -> multiplicative . DIVIDE unary
+
+    MINUS           reduce using rule 14 (additive -> additive MINUS multiplicative .)
+    PLUS            reduce using rule 14 (additive -> additive MINUS multiplicative .)
+    LTE             reduce using rule 14 (additive -> additive MINUS multiplicative .)
+    GTE             reduce using rule 14 (additive -> additive MINUS multiplicative .)
+    LT              reduce using rule 14 (additive -> additive MINUS multiplicative .)
+    GT              reduce using rule 14 (additive -> additive MINUS multiplicative .)
+    EQUAL           reduce using rule 14 (additive -> additive MINUS multiplicative .)
+    NE              reduce using rule 14 (additive -> additive MINUS multiplicative .)
+    AND             reduce using rule 14 (additive -> additive MINUS multiplicative .)
+    OR              reduce using rule 14 (additive -> additive MINUS multiplicative .)
+    $end            reduce using rule 14 (additive -> additive MINUS multiplicative .)
+    RPAREN          reduce using rule 14 (additive -> additive MINUS multiplicative .)
+    TIMES           shift and go to state 26
+    DIVIDE          shift and go to state 27
+
+
+state 39
+
+    (15) additive -> additive PLUS multiplicative .
+    (17) multiplicative -> multiplicative . TIMES unary
+    (18) multiplicative -> multiplicative . DIVIDE unary
+
+    MINUS           reduce using rule 15 (additive -> additive PLUS multiplicative .)
+    PLUS            reduce using rule 15 (additive -> additive PLUS multiplicative .)
+    LTE             reduce using rule 15 (additive -> additive PLUS multiplicative .)
+    GTE             reduce using rule 15 (additive -> additive PLUS multiplicative .)
+    LT              reduce using rule 15 (additive -> additive PLUS multiplicative .)
+    GT              reduce using rule 15 (additive -> additive PLUS multiplicative .)
+    EQUAL           reduce using rule 15 (additive -> additive PLUS multiplicative .)
+    NE              reduce using rule 15 (additive -> additive PLUS multiplicative .)
+    AND             reduce using rule 15 (additive -> additive PLUS multiplicative .)
+    OR              reduce using rule 15 (additive -> additive PLUS multiplicative .)
+    $end            reduce using rule 15 (additive -> additive PLUS multiplicative .)
+    RPAREN          reduce using rule 15 (additive -> additive PLUS multiplicative .)
+    TIMES           shift and go to state 26
+    DIVIDE          shift and go to state 27
+
+
+state 40
+
+    (17) multiplicative -> multiplicative TIMES unary .
+
+    TIMES           reduce using rule 17 (multiplicative -> multiplicative TIMES unary .)
+    DIVIDE          reduce using rule 17 (multiplicative -> multiplicative TIMES unary .)
+    MINUS           reduce using rule 17 (multiplicative -> multiplicative TIMES unary .)
+    PLUS            reduce using rule 17 (multiplicative -> multiplicative TIMES unary .)
+    LTE             reduce using rule 17 (multiplicative -> multiplicative TIMES unary .)
+    GTE             reduce using rule 17 (multiplicative -> multiplicative TIMES unary .)
+    LT              reduce using rule 17 (multiplicative -> multiplicative TIMES unary .)
+    GT              reduce using rule 17 (multiplicative -> multiplicative TIMES unary .)
+    EQUAL           reduce using rule 17 (multiplicative -> multiplicative TIMES unary .)
+    NE              reduce using rule 17 (multiplicative -> multiplicative TIMES unary .)
+    AND             reduce using rule 17 (multiplicative -> multiplicative TIMES unary .)
+    OR              reduce using rule 17 (multiplicative -> multiplicative TIMES unary .)
+    $end            reduce using rule 17 (multiplicative -> multiplicative TIMES unary .)
+    RPAREN          reduce using rule 17 (multiplicative -> multiplicative TIMES unary .)
+
+
+state 41
+
+    (18) multiplicative -> multiplicative DIVIDE unary .
+
+    TIMES           reduce using rule 18 (multiplicative -> multiplicative DIVIDE unary .)
+    DIVIDE          reduce using rule 18 (multiplicative -> multiplicative DIVIDE unary .)
+    MINUS           reduce using rule 18 (multiplicative -> multiplicative DIVIDE unary .)
+    PLUS            reduce using rule 18 (multiplicative -> multiplicative DIVIDE unary .)
+    LTE             reduce using rule 18 (multiplicative -> multiplicative DIVIDE unary .)
+    GTE             reduce using rule 18 (multiplicative -> multiplicative DIVIDE unary .)
+    LT              reduce using rule 18 (multiplicative -> multiplicative DIVIDE unary .)
+    GT              reduce using rule 18 (multiplicative -> multiplicative DIVIDE unary .)
+    EQUAL           reduce using rule 18 (multiplicative -> multiplicative DIVIDE unary .)
+    NE              reduce using rule 18 (multiplicative -> multiplicative DIVIDE unary .)
+    AND             reduce using rule 18 (multiplicative -> multiplicative DIVIDE unary .)
+    OR              reduce using rule 18 (multiplicative -> multiplicative DIVIDE unary .)
+    $end            reduce using rule 18 (multiplicative -> multiplicative DIVIDE unary .)
+    RPAREN          reduce using rule 18 (multiplicative -> multiplicative DIVIDE unary .)
+
+
+state 42
+
+    (24) primary -> LPAREN expression RPAREN .
+
+    TIMES           reduce using rule 24 (primary -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 24 (primary -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 24 (primary -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 24 (primary -> LPAREN expression RPAREN .)
+    LTE             reduce using rule 24 (primary -> LPAREN expression RPAREN .)
+    GTE             reduce using rule 24 (primary -> LPAREN expression RPAREN .)
+    LT              reduce using rule 24 (primary -> LPAREN expression RPAREN .)
+    GT              reduce using rule 24 (primary -> LPAREN expression RPAREN .)
+    EQUAL           reduce using rule 24 (primary -> LPAREN expression RPAREN .)
+    NE              reduce using rule 24 (primary -> LPAREN expression RPAREN .)
+    AND             reduce using rule 24 (primary -> LPAREN expression RPAREN .)
+    OR              reduce using rule 24 (primary -> LPAREN expression RPAREN .)
+    $end            reduce using rule 24 (primary -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 24 (primary -> LPAREN expression RPAREN .)
+
