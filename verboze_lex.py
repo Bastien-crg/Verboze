@@ -6,7 +6,6 @@ reserved = {
     'then' : 'THEN',
     'else' : 'ELSE',
     'while' : 'WHILE',
-    'is' : 'IS',
     'not' : 'NOT',
     'lower' : 'LOWER',
     'than' : 'THAN',
@@ -15,7 +14,9 @@ reserved = {
     'equal' : 'EQUAL',
     'to' : 'TO',
     'greater' : 'GREATER',
-    'worth' : 'WORTH'
+    'worth' : 'WORTH',
+    'variable' : 'VARIABLE',
+    'display' : 'DISPLAY'
 
 }
 
@@ -38,10 +39,10 @@ tokens = (
     'NE',           # !=
     'AND',          # &
     'OR',           # |
-    'IF',
-    'ELSEIF',
-    'ELSE',
-    'THEN',
+    # 'IF',
+    # 'ELSEIF',
+    # 'ELSE',
+    # 'THEN',
     'DISPLAY',
     'SEMICOLON',
     'ID',
@@ -69,15 +70,14 @@ t_EQUAL     = r'\ is\ equal\ to\ '
 t_NE        = r'\ is\ not\ equal\ to\ '
 t_AND       = r'\ and\ '
 t_OR        = r'\ or\ '
-t_IF        = r'if '
-t_ELSE      = r'else '
-t_ELSEIF    = r'else if '
-t_THEN      = r'then '
-t_ENDTHEN   = r'endthen '
+# t_IF        = r'if '
+# t_ELSE      = r'else '
+# t_ELSEIF    = r'else if '
+# t_THEN      = r'then '
 t_DISPLAY   = r'display '
 t_SEMICOLON = r'\;'
-t_VARIABLE  = r'variable '
-t_WORTH     = r'worth '
+t_VARIABLE  = r'variable'
+t_WORTH     = r'worth'
 
 
 
@@ -109,7 +109,7 @@ def t_STRING(t):
 
 
 # A string containing ignored characters (spaces and tabs)
-# t_ignore  = ' \t'
+t_ignore  = ' \t'
 
 # Error handling rule
 def t_error(t):

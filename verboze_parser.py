@@ -1,4 +1,5 @@
 import ply.yacc as yacc
+from environment import environment as env
 from verboze_lex import tokens
 
 
@@ -19,15 +20,16 @@ from verboze_lex import tokens
 
 
 def p_declaration(p):
-    """declaration : VARIABLE ID WORTH statement
-                   | VARIABLE IS SEMICOLON
+    """declaration : VARIABLE ID WORTH expression SEMICOLON
+                   | VARIABLE ID SEMICOLON
                    | statement"""
-    if len(p) == 5:
-        p[0] = p[1]
+
+    if len(p) == 6:
+        env[p[2]] = p[4]
+
 
     elif len(p) == 4:
-        print(p[2])
-        p[0] = None
+        env[p[2]] = None
 
 
 def p_statement(p):
@@ -42,9 +44,22 @@ def p_statement(p):
         p[0] = None
 
 
-def p_expression_logical_or(p):
-    'expression : logical_or'
+def p_expression(p):
+    """expression : assignment"""
     p[0] = p[1]
+
+def p_assignment(p):
+    """assignment : logical_or
+                  | ID WORTH assignment"""
+    if len(p) == 4:
+        if (p[1] in env):
+            env[p[1]] = p[3]
+            p[0] = None
+        else:
+            raise RuntimeError
+    elif len(p) == 2:
+        p[0] = p[1]
+
 
 def p_logical_or_or(p):
     'logical_or : logical_or OR logical_and'
@@ -130,24 +145,21 @@ def p_unary_primary(p):
     'unary : primary'
     p[0] = p[1]
 
-# def p_primary_boolean(p):
-#     'primary : BOOLEAN'
-#     p[0] = p[1]
-#
-# def p_primary_expr(p):
-#     'primary : LPAREN expression RPAREN'
-#     p[0] = p[2]
+
+def p_primary_id(p):
+    'primary : ID'
+    p[0] = env[p[1]]
 
 def p_primary(p):
     """primary : NUMBER
                | BOOLEAN
                | LPAREN expression RPAREN
-               | ID
                | STRING"""
-    
+
     if len(p) == 4:
         p[0] = p[2]
-    p[0] = p[1]
+    elif len(p) == 2:
+        p[0] = p[1]
 
 
 
@@ -165,4 +177,4 @@ while True:
        break
    if not s: continue
    result = parser.parse(s)
-   print(result)
+   print("env : ",env)

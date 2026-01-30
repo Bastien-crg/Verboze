@@ -1,8 +1,9 @@
+
 from verboze_lex import lexer
 
 # Test it out
 data = '''
-is greater than 
+a worth 2 
 '''
 
 # Give the lexer some input

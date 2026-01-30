@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'AND BOOLEAN DIVIDE EQUAL GT GTE LPAREN LT LTE MINUS NE NOT NUMBER OR PLUS RPAREN TIMESexpression : logical_orlogical_or : logical_or OR logical_andlogical_or : logical_andlogical_and : logical_and AND equalitylogical_and : equalityequality : equality EQUAL relationalequality : equality NE relationalequality : relationalrelational : relational LTE additiverelational : relational GTE additiverelational : relational LT additiverelational : relational GT additiverelational : additiveadditive : additive MINUS multiplicativeadditive : additive PLUS multiplicativeadditive : multiplicativemultiplicative : multiplicative TIMES unarymultiplicative : multiplicative DIVIDE unarymultiplicative : unaryunary : MINUS unaryunary : NOT unaryunary : primaryprimary : BOOLEANprimary : LPAREN expression RPARENprimary : NUMBER'
+_lr_signature = 'AND BOOLEAN DISPLAY DIVIDE EQUAL GT GTE ID LPAREN LT LTE MINUS NE NOT NUMBER OR PLUS RPAREN SEMICOLON STRING TIMES VARIABLE WORTHdeclaration : VARIABLE ID WORTH expression SEMICOLON\n                   | VARIABLE ID SEMICOLON\n                   | statementstatement : expression SEMICOLON\n                 | DISPLAY expression SEMICOLONexpression : assignmentassignment : logical_or\n                  | ID WORTH assignmentlogical_or : logical_or OR logical_andlogical_or : logical_andlogical_and : logical_and AND equalitylogical_and : equalityequality : equality EQUAL relationalequality : equality NE relationalequality : relationalrelational : relational LTE additiverelational : relational GTE additiverelational : relational LT additiverelational : relational GT additiverelational : additiveadditive : additive MINUS multiplicativeadditive : additive PLUS multiplicativeadditive : multiplicativemultiplicative : multiplicative TIMES unarymultiplicative : multiplicative DIVIDE unarymultiplicative : unaryunary : MINUS unaryunary : NOT unaryunary : primaryprimary : IDprimary : NUMBER\n               | BOOLEAN\n               | LPAREN expression RPAREN\n               | STRING'
     
-_lr_action_items = {'MINUS':([0,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,34,35,36,37,38,39,40,41,42,],[7,23,7,-16,-19,7,-22,-23,7,-25,7,7,7,7,7,7,7,7,7,7,-20,7,7,-21,23,23,23,23,-14,-15,-17,-18,-24,]),'NOT':([0,7,10,13,15,16,17,18,19,20,21,22,23,24,26,27,],[10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,]),'BOOLEAN':([0,7,10,13,15,16,17,18,19,20,21,22,23,24,26,27,],[12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,]),'LPAREN':([0,7,10,13,15,16,17,18,19,20,21,22,23,24,26,27,],[13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,]),'NUMBER':([0,7,10,13,15,16,17,18,19,20,21,22,23,24,26,27,],[14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,]),'$end':([1,2,3,4,5,6,8,9,11,12,14,25,28,30,31,32,33,34,35,36,37,38,39,40,41,42,],[0,-1,-3,-5,-8,-13,-16,-19,-22,-23,-25,-20,-21,-2,-4,-6,-7,-9,-10,-11,-12,-14,-15,-17,-18,-24,]),'RPAREN':([2,3,4,5,6,8,9,11,12,14,25,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,],[-1,-3,-5,-8,-13,-16,-19,-22,-23,-25,-20,-21,42,-2,-4,-6,-7,-9,-10,-11,-12,-14,-15,-17,-18,-24,]),'OR':([2,3,4,5,6,8,9,11,12,14,25,28,30,31,32,33,34,35,36,37,38,39,40,41,42,],[15,-3,-5,-8,-13,-16,-19,-22,-23,-25,-20,-21,-2,-4,-6,-7,-9,-10,-11,-12,-14,-15,-17,-18,-24,]),'AND':([3,4,5,6,8,9,11,12,14,25,28,30,31,32,33,34,35,36,37,38,39,40,41,42,],[16,-5,-8,-13,-16,-19,-22,-23,-25,-20,-21,16,-4,-6,-7,-9,-10,-11,-12,-14,-15,-17,-18,-24,]),'EQUAL':([4,5,6,8,9,11,12,14,25,28,31,32,33,34,35,36,37,38,39,40,41,42,],[17,-8,-13,-16,-19,-22,-23,-25,-20,-21,17,-6,-7,-9,-10,-11,-12,-14,-15,-17,-18,-24,]),'NE':([4,5,6,8,9,11,12,14,25,28,31,32,33,34,35,36,37,38,39,40,41,42,],[18,-8,-13,-16,-19,-22,-23,-25,-20,-21,18,-6,-7,-9,-10,-11,-12,-14,-15,-17,-18,-24,]),'LTE':([5,6,8,9,11,12,14,25,28,32,33,34,35,36,37,38,39,40,41,42,],[19,-13,-16,-19,-22,-23,-25,-20,-21,19,19,-9,-10,-11,-12,-14,-15,-17,-18,-24,]),'GTE':([5,6,8,9,11,12,14,25,28,32,33,34,35,36,37,38,39,40,41,42,],[20,-13,-16,-19,-22,-23,-25,-20,-21,20,20,-9,-10,-11,-12,-14,-15,-17,-18,-24,]),'LT':([5,6,8,9,11,12,14,25,28,32,33,34,35,36,37,38,39,40,41,42,],[21,-13,-16,-19,-22,-23,-25,-20,-21,21,21,-9,-10,-11,-12,-14,-15,-17,-18,-24,]),'GT':([5,6,8,9,11,12,14,25,28,32,33,34,35,36,37,38,39,40,41,42,],[22,-13,-16,-19,-22,-23,-25,-20,-21,22,22,-9,-10,-11,-12,-14,-15,-17,-18,-24,]),'PLUS':([6,8,9,11,12,14,25,28,34,35,36,37,38,39,40,41,42,],[24,-16,-19,-22,-23,-25,-20,-21,24,24,24,24,-14,-15,-17,-18,-24,]),'TIMES':([8,9,11,12,14,25,28,38,39,40,41,42,],[26,-19,-22,-23,-25,-20,-21,26,26,-17,-18,-24,]),'DIVIDE':([8,9,11,12,14,25,28,38,39,40,41,42,],[27,-19,-22,-23,-25,-20,-21,27,27,-17,-18,-24,]),}
+_lr_action_items = {'VARIABLE':([0,],[2,]),'DISPLAY':([0,],[6,]),'ID':([0,2,6,13,16,20,23,26,27,28,29,30,31,32,33,34,35,38,39,42,],[3,22,3,37,37,3,3,37,37,37,37,37,37,37,37,37,37,37,37,3,]),'MINUS':([0,3,6,12,13,14,15,16,17,18,19,20,21,23,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,42,50,51,52,53,54,55,56,57,58,],[13,-30,13,34,13,-23,-26,13,-29,-31,-32,13,-34,13,13,13,13,13,13,13,13,13,13,13,-27,-30,13,13,-28,13,34,34,34,34,-21,-22,-24,-25,-33,]),'NOT':([0,6,13,16,20,23,26,27,28,29,30,31,32,33,34,35,38,39,42,],[16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,]),'NUMBER':([0,6,13,16,20,23,26,27,28,29,30,31,32,33,34,35,38,39,42,],[18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,]),'BOOLEAN':([0,6,13,16,20,23,26,27,28,29,30,31,32,33,34,35,38,39,42,],[19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,]),'LPAREN':([0,6,13,16,20,23,26,27,28,29,30,31,32,33,34,35,38,39,42,],[20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,]),'STRING':([0,6,13,16,20,23,26,27,28,29,30,31,32,33,34,35,38,39,42,],[21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,]),'$end':([1,5,24,43,45,60,],[0,-3,-4,-2,-5,-1,]),'WORTH':([3,22,],[23,42,]),'TIMES':([3,14,15,17,18,19,21,36,37,40,54,55,56,57,58,],[-30,38,-26,-29,-31,-32,-34,-27,-30,-28,38,38,-24,-25,-33,]),'DIVIDE':([3,14,15,17,18,19,21,36,37,40,54,55,56,57,58,],[-30,39,-26,-29,-31,-32,-34,-27,-30,-28,39,39,-24,-25,-33,]),'PLUS':([3,12,14,15,17,18,19,21,36,37,40,50,51,52,53,54,55,56,57,58,],[-30,35,-23,-26,-29,-31,-32,-34,-27,-30,-28,35,35,35,35,-21,-22,-24,-25,-33,]),'LTE':([3,11,12,14,15,17,18,19,21,36,37,40,48,49,50,51,52,53,54,55,56,57,58,],[-30,30,-20,-23,-26,-29,-31,-32,-34,-27,-30,-28,30,30,-16,-17,-18,-19,-21,-22,-24,-25,-33,]),'GTE':([3,11,12,14,15,17,18,19,21,36,37,40,48,49,50,51,52,53,54,55,56,57,58,],[-30,31,-20,-23,-26,-29,-31,-32,-34,-27,-30,-28,31,31,-16,-17,-18,-19,-21,-22,-24,-25,-33,]),'LT':([3,11,12,14,15,17,18,19,21,36,37,40,48,49,50,51,52,53,54,55,56,57,58,],[-30,32,-20,-23,-26,-29,-31,-32,-34,-27,-30,-28,32,32,-16,-17,-18,-19,-21,-22,-24,-25,-33,]),'GT':([3,11,12,14,15,17,18,19,21,36,37,40,48,49,50,51,52,53,54,55,56,57,58,],[-30,33,-20,-23,-26,-29,-31,-32,-34,-27,-30,-28,33,33,-16,-17,-18,-19,-21,-22,-24,-25,-33,]),'EQUAL':([3,10,11,12,14,15,17,18,19,21,36,37,40,47,48,49,50,51,52,53,54,55,56,57,58,],[-30,28,-15,-20,-23,-26,-29,-31,-32,-34,-27,-30,-28,28,-13,-14,-16,-17,-18,-19,-21,-22,-24,-25,-33,]),'NE':([3,10,11,12,14,15,17,18,19,21,36,37,40,47,48,49,50,51,52,53,54,55,56,57,58,],[-30,29,-15,-20,-23,-26,-29,-31,-32,-34,-27,-30,-28,29,-13,-14,-16,-17,-18,-19,-21,-22,-24,-25,-33,]),'AND':([3,9,10,11,12,14,15,17,18,19,21,36,37,40,46,47,48,49,50,51,52,53,54,55,56,57,58,],[-30,27,-12,-15,-20,-23,-26,-29,-31,-32,-34,-27,-30,-28,27,-11,-13,-14,-16,-17,-18,-19,-21,-22,-24,-25,-33,]),'OR':([3,8,9,10,11,12,14,15,17,18,19,21,36,37,40,46,47,48,49,50,51,52,53,54,55,56,57,58,],[-30,26,-10,-12,-15,-20,-23,-26,-29,-31,-32,-34,-27,-30,-28,-9,-11,-13,-14,-16,-17,-18,-19,-21,-22,-24,-25,-33,]),'SEMICOLON':([3,4,7,8,9,10,11,12,14,15,17,18,19,21,22,25,36,37,40,44,46,47,48,49,50,51,52,53,54,55,56,57,58,59,],[-30,24,-6,-7,-10,-12,-15,-20,-23,-26,-29,-31,-32,-34,43,45,-27,-30,-28,-8,-9,-11,-13,-14,-16,-17,-18,-19,-21,-22,-24,-25,-33,60,]),'RPAREN':([3,7,8,9,10,11,12,14,15,17,18,19,21,36,37,40,41,44,46,47,48,49,50,51,52,53,54,55,56,57,58,],[-30,-6,-7,-10,-12,-15,-20,-23,-26,-29,-31,-32,-34,-27,-30,-28,58,-8,-9,-11,-13,-14,-16,-17,-18,-19,-21,-22,-24,-25,-33,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expression':([0,13,],[1,29,]),'logical_or':([0,13,],[2,2,]),'logical_and':([0,13,15,],[3,3,30,]),'equality':([0,13,15,16,],[4,4,4,31,]),'relational':([0,13,15,16,17,18,],[5,5,5,5,32,33,]),'additive':([0,13,15,16,17,18,19,20,21,22,],[6,6,6,6,6,6,34,35,36,37,]),'multiplicative':([0,13,15,16,17,18,19,20,21,22,23,24,],[8,8,8,8,8,8,8,8,8,8,38,39,]),'unary':([0,7,10,13,15,16,17,18,19,20,21,22,23,24,26,27,],[9,25,28,9,9,9,9,9,9,9,9,9,9,9,40,41,]),'primary':([0,7,10,13,15,16,17,18,19,20,21,22,23,24,26,27,],[11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,]),}
+_lr_goto_items = {'declaration':([0,],[1,]),'expression':([0,6,20,42,],[4,25,41,59,]),'statement':([0,],[5,]),'assignment':([0,6,20,23,42,],[7,7,7,44,7,]),'logical_or':([0,6,20,23,42,],[8,8,8,8,8,]),'logical_and':([0,6,20,23,26,42,],[9,9,9,9,46,9,]),'equality':([0,6,20,23,26,27,42,],[10,10,10,10,10,47,10,]),'relational':([0,6,20,23,26,27,28,29,42,],[11,11,11,11,11,11,48,49,11,]),'additive':([0,6,20,23,26,27,28,29,30,31,32,33,42,],[12,12,12,12,12,12,12,12,50,51,52,53,12,]),'multiplicative':([0,6,20,23,26,27,28,29,30,31,32,33,34,35,42,],[14,14,14,14,14,14,14,14,14,14,14,14,54,55,14,]),'unary':([0,6,13,16,20,23,26,27,28,29,30,31,32,33,34,35,38,39,42,],[15,15,36,40,15,15,15,15,15,15,15,15,15,15,15,15,56,57,15,]),'primary':([0,6,13,16,20,23,26,27,28,29,30,31,32,33,34,35,38,39,42,],[17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,30 +26,39 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> expression","S'",1,None,None,None),
-  ('expression -> logical_or','expression',1,'p_expression_logical_or','verboze_parser.py',6),
-  ('logical_or -> logical_or OR logical_and','logical_or',3,'p_logical_or_or','verboze_parser.py',10),
-  ('logical_or -> logical_and','logical_or',1,'p_logical_or_logical_and','verboze_parser.py',14),
-  ('logical_and -> logical_and AND equality','logical_and',3,'p_logical_and_and','verboze_parser.py',18),
-  ('logical_and -> equality','logical_and',1,'p_logical_and_equality','verboze_parser.py',22),
-  ('equality -> equality EQUAL relational','equality',3,'p_equality_equal','verboze_parser.py',26),
-  ('equality -> equality NE relational','equality',3,'p_equality_ne','verboze_parser.py',30),
-  ('equality -> relational','equality',1,'p_equality_relational','verboze_parser.py',34),
-  ('relational -> relational LTE additive','relational',3,'p_relational_lte','verboze_parser.py',38),
-  ('relational -> relational GTE additive','relational',3,'p_relational_gte','verboze_parser.py',42),
-  ('relational -> relational LT additive','relational',3,'p_relational_lt','verboze_parser.py',46),
-  ('relational -> relational GT additive','relational',3,'p_relational_gt','verboze_parser.py',50),
-  ('relational -> additive','relational',1,'p_relational_additive','verboze_parser.py',54),
-  ('additive -> additive MINUS multiplicative','additive',3,'p_additive_minus','verboze_parser.py',58),
-  ('additive -> additive PLUS multiplicative','additive',3,'p_additive_plus','verboze_parser.py',62),
-  ('additive -> multiplicative','additive',1,'p_additive_multiplicative','verboze_parser.py',66),
-  ('multiplicative -> multiplicative TIMES unary','multiplicative',3,'p_multiplicative_times','verboze_parser.py',70),
-  ('multiplicative -> multiplicative DIVIDE unary','multiplicative',3,'p_multiplicative_div','verboze_parser.py',74),
-  ('multiplicative -> unary','multiplicative',1,'p_multiplicative_unary','verboze_parser.py',78),
-  ('unary -> MINUS unary','unary',2,'p_unary_minus','verboze_parser.py',82),
-  ('unary -> NOT unary','unary',2,'p_unary_not','verboze_parser.py',86),
-  ('unary -> primary','unary',1,'p_unary_primary','verboze_parser.py',90),
-  ('primary -> BOOLEAN','primary',1,'p_primary_boolean','verboze_parser.py',94),
-  ('primary -> LPAREN expression RPAREN','primary',3,'p_primary_expr','verboze_parser.py',98),
-  ('primary -> NUMBER','primary',1,'p_primary_num','verboze_parser.py',102),
+  ("S' -> declaration","S'",1,None,None,None),
+  ('declaration -> VARIABLE ID WORTH expression SEMICOLON','declaration',5,'p_declaration','verboze_parser.py',23),
+  ('declaration -> VARIABLE ID SEMICOLON','declaration',3,'p_declaration','verboze_parser.py',24),
+  ('declaration -> statement','declaration',1,'p_declaration','verboze_parser.py',25),
+  ('statement -> expression SEMICOLON','statement',2,'p_statement','verboze_parser.py',34),
+  ('statement -> DISPLAY expression SEMICOLON','statement',3,'p_statement','verboze_parser.py',35),
+  ('expression -> assignment','expression',1,'p_expression','verboze_parser.py',46),
+  ('assignment -> logical_or','assignment',1,'p_assignment','verboze_parser.py',50),
+  ('assignment -> ID WORTH assignment','assignment',3,'p_assignment','verboze_parser.py',51),
+  ('logical_or -> logical_or OR logical_and','logical_or',3,'p_logical_or_or','verboze_parser.py',63),
+  ('logical_or -> logical_and','logical_or',1,'p_logical_or_logical_and','verboze_parser.py',67),
+  ('logical_and -> logical_and AND equality','logical_and',3,'p_logical_and_and','verboze_parser.py',71),
+  ('logical_and -> equality','logical_and',1,'p_logical_and_equality','verboze_parser.py',75),
+  ('equality -> equality EQUAL relational','equality',3,'p_equality_equal','verboze_parser.py',79),
+  ('equality -> equality NE relational','equality',3,'p_equality_ne','verboze_parser.py',83),
+  ('equality -> relational','equality',1,'p_equality_relational','verboze_parser.py',87),
+  ('relational -> relational LTE additive','relational',3,'p_relational_lte','verboze_parser.py',91),
+  ('relational -> relational GTE additive','relational',3,'p_relational_gte','verboze_parser.py',95),
+  ('relational -> relational LT additive','relational',3,'p_relational_lt','verboze_parser.py',99),
+  ('relational -> relational GT additive','relational',3,'p_relational_gt','verboze_parser.py',103),
+  ('relational -> additive','relational',1,'p_relational_additive','verboze_parser.py',107),
+  ('additive -> additive MINUS multiplicative','additive',3,'p_additive_minus','verboze_parser.py',111),
+  ('additive -> additive PLUS multiplicative','additive',3,'p_additive_plus','verboze_parser.py',115),
+  ('additive -> multiplicative','additive',1,'p_additive_multiplicative','verboze_parser.py',119),
+  ('multiplicative -> multiplicative TIMES unary','multiplicative',3,'p_multiplicative_times','verboze_parser.py',123),
+  ('multiplicative -> multiplicative DIVIDE unary','multiplicative',3,'p_multiplicative_div','verboze_parser.py',127),
+  ('multiplicative -> unary','multiplicative',1,'p_multiplicative_unary','verboze_parser.py',131),
+  ('unary -> MINUS unary','unary',2,'p_unary_minus','verboze_parser.py',135),
+  ('unary -> NOT unary','unary',2,'p_unary_not','verboze_parser.py',139),
+  ('unary -> primary','unary',1,'p_unary_primary','verboze_parser.py',143),
+  ('primary -> ID','primary',1,'p_primary_id','verboze_parser.py',148),
+  ('primary -> NUMBER','primary',1,'p_primary','verboze_parser.py',152),
+  ('primary -> BOOLEAN','primary',1,'p_primary','verboze_parser.py',153),
+  ('primary -> LPAREN expression RPAREN','primary',3,'p_primary','verboze_parser.py',154),
+  ('primary -> STRING','primary',1,'p_primary','verboze_parser.py',155),
 ]
