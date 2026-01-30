@@ -1,6 +1,24 @@
 import ply.lex as lex
 
 
+reserved = {
+    'if' : 'IF',
+    'then' : 'THEN',
+    'else' : 'ELSE',
+    'while' : 'WHILE',
+    'is' : 'IS',
+    'not' : 'NOT',
+    'lower' : 'LOWER',
+    'than' : 'THAN',
+    'and' : 'AND',
+    'or' : 'OR',
+    'equal' : 'EQUAL',
+    'to' : 'TO',
+    'greater' : 'GREATER',
+    'worth' : 'WORTH'
+
+}
+
 # List of token names
 tokens = (
     'NUMBER',
@@ -19,26 +37,49 @@ tokens = (
     'EQUAL',        # ==
     'NE',           # !=
     'AND',          # &
-    'OR'            # |
+    'OR',           # |
+    'IF',
+    'ELSEIF',
+    'ELSE',
+    'THEN',
+    'DISPLAY',
+    'SEMICOLON',
+    'ID',
+    'VARIABLE',
+    'WORTH',
+    'STRING'
 
 )
 
+
+
 # Regular expression rules
-t_PLUS    = r'\+'
-t_MINUS   = r'-'
-t_TIMES   = r'\*'
-t_DIVIDE  = r'/'
-t_LPAREN  = r'\('
-t_RPAREN  = r'\)'
-t_NOT     = r'\ not\ '
-t_LT      = r'\ is\ lower\ than\ '
-t_GT      = r'\ is\ greater\ than\ '
-t_LTE     = r'\ is\ lower\ or\ equal\ to\ '
-t_GTE     = r'\ is\ greater\ or\ equal\ to\ '
-t_EQUAL   = r'\ is\ equal\ to\ '
-t_NE      = r'\ is\ not\ equal\ to\ '
-t_AND     = r'\ and\ '
-t_OR      = r'\ or\ '
+t_PLUS      = r'\+'
+t_MINUS     = r'-'
+t_TIMES     = r'\*'
+t_DIVIDE    = r'/'
+t_LPAREN    = r'\('
+t_RPAREN    = r'\)'
+t_NOT       = r'\ not\ '
+t_LT        = r'\ is\ lower\ than\ '
+t_GT        = r'\ is\ greater\ than\ '
+t_LTE       = r'\ is\ lower\ or\ equal\ to\ '
+t_GTE       = r'\ is\ greater\ or\ equal\ to\ '
+t_EQUAL     = r'\ is\ equal\ to\ '
+t_NE        = r'\ is\ not\ equal\ to\ '
+t_AND       = r'\ and\ '
+t_OR        = r'\ or\ '
+t_IF        = r'if '
+t_ELSE      = r'else '
+t_ELSEIF    = r'else if '
+t_THEN      = r'then '
+t_ENDTHEN   = r'endthen '
+t_DISPLAY   = r'display '
+t_SEMICOLON = r'\;'
+t_VARIABLE  = r'variable '
+t_WORTH     = r'worth '
+
+
 
 # A regular expression rule with some action code
 def t_NUMBER(t):
@@ -56,6 +97,16 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
+def t_ID(t):
+    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    t.type = reserved.get(t.value,'ID')    # Check for reserved words
+    return t
+
+def t_STRING(t):
+    r'["\']([^"\']*)["\']'
+        # Check for reserved words
+    return t
+
 
 # A string containing ignored characters (spaces and tabs)
 # t_ignore  = ' \t'
@@ -66,28 +117,6 @@ def t_error(t):
     t.lexer.skip(1)
 
 
-
-reserved = {
-    'if' : 'IF',
-    'then' : 'THEN',
-    'else' : 'ELSE',
-    'while' : 'WHILE',
-    'is' : 'IS',
-    'not' : 'NOT',
-    'lower' : 'LOWER',
-    'than' : 'THAN',
-    'and' : 'AND',
-    'or' : 'OR',
-    'equal' : 'EQUAL',
-    'to' : 'TO',
-    'greater' : 'GREATER'
-
-}
-
-# def t_ID(t):
-#     r'[a-zA-Z_][a-zA-Z_0-9]*'
-#     t.type = reserved.get(t.value,'ID')    # Check for reserved words
-#     return t
 
 # Build the lexer
 lexer = lex.lex()

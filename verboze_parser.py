@@ -2,6 +2,46 @@ import ply.yacc as yacc
 from verboze_lex import tokens
 
 
+
+
+# def p_if_statement(p):
+#     """if_statement : IF expression THEN statement ENDTHEN
+#                     | IF expression THEN statement ENDTHEN ELSE if_statement"""
+#     if len(p) == 6:
+#         if p[2]:
+#             p[0] = p[4]
+#
+#     elif len(p) == 7:
+#         if p[2]:
+#             p[0] = p[4]
+#         else:
+#             p[0] = p[7]
+
+
+def p_declaration(p):
+    """declaration : VARIABLE ID WORTH statement
+                   | VARIABLE IS SEMICOLON
+                   | statement"""
+    if len(p) == 5:
+        p[0] = p[1]
+
+    elif len(p) == 4:
+        print(p[2])
+        p[0] = None
+
+
+def p_statement(p):
+    """statement : expression SEMICOLON
+                 | DISPLAY expression SEMICOLON"""
+
+    if len(p) == 2:
+        p[0] = p[1]
+
+    elif len(p) == 4:
+        print(p[2])
+        p[0] = None
+
+
 def p_expression_logical_or(p):
     'expression : logical_or'
     p[0] = p[1]
@@ -90,16 +130,23 @@ def p_unary_primary(p):
     'unary : primary'
     p[0] = p[1]
 
-def p_primary_boolean(p):
-    'primary : BOOLEAN'
-    p[0] = p[1]
+# def p_primary_boolean(p):
+#     'primary : BOOLEAN'
+#     p[0] = p[1]
+#
+# def p_primary_expr(p):
+#     'primary : LPAREN expression RPAREN'
+#     p[0] = p[2]
 
-def p_primary_expr(p):
-    'primary : LPAREN expression RPAREN'
-    p[0] = p[2]
-
-def p_primary_num(p):
-    'primary : NUMBER'
+def p_primary(p):
+    """primary : NUMBER
+               | BOOLEAN
+               | LPAREN expression RPAREN
+               | ID
+               | STRING"""
+    
+    if len(p) == 4:
+        p[0] = p[2]
     p[0] = p[1]
 
 
