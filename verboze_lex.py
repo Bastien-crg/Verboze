@@ -104,7 +104,8 @@ def t_ID(t):
 
 def t_STRING(t):
     r'["\']([^"\']*)["\']'
-        # Check for reserved words
+    # remove quote
+    t.value = t.value[1:-1]
     return t
 
 

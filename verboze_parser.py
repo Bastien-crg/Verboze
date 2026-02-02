@@ -1,8 +1,8 @@
 import ply.yacc as yacc
-from environment import environment as env
+from environment import Environment
 from verboze_lex import tokens
 
-
+env = Environment()
 
 
 # def p_if_statement(p):
@@ -17,6 +17,19 @@ from verboze_lex import tokens
 #             p[0] = p[4]
 #         else:
 #             p[0] = p[7]
+#
+
+
+def p_block(p):
+    """block : '{' sequence '}'"""
+    global env
+    previous = env
+    env = Environment(previous)
+
+
+def p_sequence(p):
+    """sequence : declaration
+                | sequence declaration"""
 
 
 def p_declaration(p):
@@ -25,11 +38,11 @@ def p_declaration(p):
                    | statement"""
 
     if len(p) == 6:
-        env[p[2]] = p[4]
+        env.define(p[2], p[4])
 
 
     elif len(p) == 4:
-        env[p[2]] = None
+        env.define(p[2], None)
 
 
 def p_statement(p):
@@ -52,11 +65,7 @@ def p_assignment(p):
     """assignment : logical_or
                   | ID WORTH assignment"""
     if len(p) == 4:
-        if (p[1] in env):
-            env[p[1]] = p[3]
-            p[0] = None
-        else:
-            raise RuntimeError
+        env.assign(p[1], p[3])
     elif len(p) == 2:
         p[0] = p[1]
 
@@ -148,7 +157,7 @@ def p_unary_primary(p):
 
 def p_primary_id(p):
     'primary : ID'
-    p[0] = env[p[1]]
+    p[0] = env.get(p[1])
 
 def p_primary(p):
     """primary : NUMBER
@@ -167,14 +176,20 @@ def p_primary(p):
 def p_error(p):
     print("Syntax error in input!")
 
-# Build the parser
-parser = yacc.yacc()
 
-while True:
-   try:
-       s = input('expression : ')
-   except EOFError:
-       break
-   if not s: continue
-   result = parser.parse(s)
-   print("env : ",env)
+if __name__ == '__main__':
+
+
+
+
+    # Build the parser
+    parser = yacc.yacc()
+
+    while True:
+       try:
+           s = input('expression : ')
+       except EOFError:
+           break
+       if not s: continue
+       result = parser.parse(s)
+       print("env : ",env.values)
