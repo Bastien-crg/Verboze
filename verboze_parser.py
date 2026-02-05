@@ -1,30 +1,17 @@
 import ply.yacc as yacc
 from environment import Environment
-from verboze_lex import tokens
+from verboze_lexer import tokens
 
 env = Environment()
 
 
-# def p_if_statement(p):
-#     """if_statement : IF expression THEN statement ENDTHEN
-#                     | IF expression THEN statement ENDTHEN ELSE if_statement"""
-#     if len(p) == 6:
-#         if p[2]:
-#             p[0] = p[4]
-#
-#     elif len(p) == 7:
-#         if p[2]:
-#             p[0] = p[4]
-#         else:
-#             p[0] = p[7]
-#
 
+#
+#
+#
+# def p_block(p):
+#     """block : '{' sequence '}'"""
 
-def p_block(p):
-    """block : '{' sequence '}'"""
-    global env
-    previous = env
-    env = Environment(previous)
 
 
 def p_sequence(p):
@@ -45,9 +32,13 @@ def p_declaration(p):
         env.define(p[2], None)
 
 
+
+
+
 def p_statement(p):
     """statement : expression SEMICOLON
-                 | DISPLAY expression SEMICOLON"""
+                 | DISPLAY expression SEMICOLON
+                 | if_statement"""
 
     if len(p) == 2:
         p[0] = p[1]
@@ -55,6 +46,20 @@ def p_statement(p):
     elif len(p) == 4:
         print(p[2])
         p[0] = None
+
+def p_if_statement(p):
+    """if_statement : IF expression THEN statement"""
+#                   | IF expression THEN statement ENDTHEN ELSE if_statement"""
+    if len(p) == 5:
+        if p[2]:
+            print("here")
+            p[0] = p[4]
+
+    elif len(p) == 7:
+        if p[2]:
+            p[0] = p[4]
+        else:
+            p[0] = p[7]
 
 
 def p_expression(p):

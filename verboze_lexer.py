@@ -39,10 +39,10 @@ tokens = (
     'NE',           # !=
     'AND',          # &
     'OR',           # |
-    # 'IF',
+    'IF',
     # 'ELSEIF',
     # 'ELSE',
-    # 'THEN',
+    'THEN',
     'DISPLAY',
     'SEMICOLON',
     'ID',
@@ -70,10 +70,10 @@ t_EQUAL     = r'\ is\ equal\ to\ '
 t_NE        = r'\ is\ not\ equal\ to\ '
 t_AND       = r'\ and\ '
 t_OR        = r'\ or\ '
-# t_IF        = r'if '
+t_IF        = r'if '
 # t_ELSE      = r'else '
 # t_ELSEIF    = r'else if '
-# t_THEN      = r'then '
+t_THEN      = r'then '
 t_DISPLAY   = r'display '
 t_SEMICOLON = r'\;'
 t_VARIABLE  = r'variable'

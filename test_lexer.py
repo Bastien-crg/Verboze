@@ -1,9 +1,9 @@
 
-from verboze_lex import lexer
+from verboze_lexer import lexer
 
 # Test it out
 data = '''
-variable a worth 2; variable b worth 3;
+if 1 then display "toto";
 '''
 
 # Give the lexer some input
