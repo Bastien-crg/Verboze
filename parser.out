@@ -2,1750 +2,1977 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Grammar
 
-Rule 0     S' -> sequence
-Rule 1     sequence -> declaration
-Rule 2     sequence -> sequence declaration
-Rule 3     declaration -> VARIABLE ID WORTH expression SEMICOLON
-Rule 4     declaration -> VARIABLE ID SEMICOLON
-Rule 5     declaration -> statement
-Rule 6     statement -> expression SEMICOLON
-Rule 7     statement -> DISPLAY expression SEMICOLON
-Rule 8     statement -> if_statement
-Rule 9     if_statement -> IF expression THEN statement
-Rule 10    expression -> assignment
-Rule 11    assignment -> logical_or
-Rule 12    assignment -> ID WORTH assignment
-Rule 13    logical_or -> logical_or OR logical_and
-Rule 14    logical_or -> logical_and
-Rule 15    logical_and -> logical_and AND equality
-Rule 16    logical_and -> equality
-Rule 17    equality -> equality EQUAL relational
-Rule 18    equality -> equality NE relational
-Rule 19    equality -> relational
-Rule 20    relational -> relational LTE additive
-Rule 21    relational -> relational GTE additive
-Rule 22    relational -> relational LT additive
-Rule 23    relational -> relational GT additive
-Rule 24    relational -> additive
-Rule 25    additive -> additive MINUS multiplicative
-Rule 26    additive -> additive PLUS multiplicative
-Rule 27    additive -> multiplicative
-Rule 28    multiplicative -> multiplicative TIMES unary
-Rule 29    multiplicative -> multiplicative DIVIDE unary
-Rule 30    multiplicative -> unary
-Rule 31    unary -> MINUS unary
-Rule 32    unary -> NOT unary
-Rule 33    unary -> primary
-Rule 34    primary -> ID
-Rule 35    primary -> NUMBER
-Rule 36    primary -> BOOLEAN
-Rule 37    primary -> LPAREN expression RPAREN
-Rule 38    primary -> STRING
+Rule 0     S' -> program
+Rule 1     program -> sequence
+Rule 2     block -> LBRAC sequence RBRAC
+Rule 3     sequence -> declaration
+Rule 4     sequence -> sequence declaration
+Rule 5     declaration -> VARIABLE ID WORTH expression SEMICOLON
+Rule 6     declaration -> VARIABLE ID SEMICOLON
+Rule 7     declaration -> statement
+Rule 8     statement -> expression SEMICOLON
+Rule 9     statement -> DISPLAY expression SEMICOLON
+Rule 10    statement -> if_statement
+Rule 11    statement -> block
+Rule 12    if_statement -> IF expression THEN statement
+Rule 13    expression -> assignment
+Rule 14    assignment -> logical_or
+Rule 15    assignment -> ID WORTH assignment
+Rule 16    logical_or -> logical_or OR logical_and
+Rule 17    logical_or -> logical_and
+Rule 18    logical_and -> logical_and AND equality
+Rule 19    logical_and -> equality
+Rule 20    equality -> equality EQUAL relational
+Rule 21    equality -> equality NE relational
+Rule 22    equality -> relational
+Rule 23    relational -> relational LTE additive
+Rule 24    relational -> relational GTE additive
+Rule 25    relational -> relational LT additive
+Rule 26    relational -> relational GT additive
+Rule 27    relational -> additive
+Rule 28    additive -> additive MINUS multiplicative
+Rule 29    additive -> additive PLUS multiplicative
+Rule 30    additive -> multiplicative
+Rule 31    multiplicative -> multiplicative TIMES unary
+Rule 32    multiplicative -> multiplicative DIVIDE unary
+Rule 33    multiplicative -> unary
+Rule 34    unary -> MINUS unary
+Rule 35    unary -> NOT unary
+Rule 36    unary -> primary
+Rule 37    primary -> ID
+Rule 38    primary -> NUMBER
+Rule 39    primary -> BOOLEAN
+Rule 40    primary -> LPAREN expression RPAREN
+Rule 41    primary -> STRING
 
 Terminals, with rules where they appear
 
-AND                  : 15
-BOOLEAN              : 36
-DISPLAY              : 7
-DIVIDE               : 29
-EQUAL                : 17
-GT                   : 23
-GTE                  : 21
-ID                   : 3 4 12 34
-IF                   : 9
-LPAREN               : 37
-LT                   : 22
-LTE                  : 20
-MINUS                : 25 31
-NE                   : 18
-NOT                  : 32
-NUMBER               : 35
-OR                   : 13
-PLUS                 : 26
-RPAREN               : 37
-SEMICOLON            : 3 4 6 7
-STRING               : 38
-THEN                 : 9
-TIMES                : 28
-VARIABLE             : 3 4
-WORTH                : 3 12
+AND                  : 18
+BOOLEAN              : 39
+DISPLAY              : 9
+DIVIDE               : 32
+EQUAL                : 20
+GT                   : 26
+GTE                  : 24
+ID                   : 5 6 15 37
+IF                   : 12
+LBRAC                : 2
+LPAREN               : 40
+LT                   : 25
+LTE                  : 23
+MINUS                : 28 34
+NE                   : 21
+NOT                  : 35
+NUMBER               : 38
+OR                   : 16
+PLUS                 : 29
+RBRAC                : 2
+RPAREN               : 40
+SEMICOLON            : 5 6 8 9
+STRING               : 41
+THEN                 : 12
+TIMES                : 31
+VARIABLE             : 5 6
+WORTH                : 5 15
 error                : 
 
 Nonterminals, with rules where they appear
 
-additive             : 20 21 22 23 24 25 26
-assignment           : 10 12
-declaration          : 1 2
-equality             : 15 16 17 18
-expression           : 3 6 7 9 37
-if_statement         : 8
-logical_and          : 13 14 15
-logical_or           : 11 13
-multiplicative       : 25 26 27 28 29
-primary              : 33
-relational           : 17 18 19 20 21 22 23
-sequence             : 2 0
-statement            : 5 9
-unary                : 28 29 30 31 32
+additive             : 23 24 25 26 27 28 29
+assignment           : 13 15
+block                : 11
+declaration          : 3 4
+equality             : 18 19 20 21
+expression           : 5 8 9 12 40
+if_statement         : 10
+logical_and          : 16 17 18
+logical_or           : 14 16
+multiplicative       : 28 29 30 31 32
+primary              : 36
+program              : 0
+relational           : 20 21 22 23 24 25 26
+sequence             : 1 2 4
+statement            : 7 12
+unary                : 31 32 33 34 35
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . sequence
-    (1) sequence -> . declaration
-    (2) sequence -> . sequence declaration
-    (3) declaration -> . VARIABLE ID WORTH expression SEMICOLON
-    (4) declaration -> . VARIABLE ID SEMICOLON
-    (5) declaration -> . statement
-    (6) statement -> . expression SEMICOLON
-    (7) statement -> . DISPLAY expression SEMICOLON
-    (8) statement -> . if_statement
-    (10) expression -> . assignment
-    (9) if_statement -> . IF expression THEN statement
-    (11) assignment -> . logical_or
-    (12) assignment -> . ID WORTH assignment
-    (13) logical_or -> . logical_or OR logical_and
-    (14) logical_or -> . logical_and
-    (15) logical_and -> . logical_and AND equality
-    (16) logical_and -> . equality
-    (17) equality -> . equality EQUAL relational
-    (18) equality -> . equality NE relational
-    (19) equality -> . relational
-    (20) relational -> . relational LTE additive
-    (21) relational -> . relational GTE additive
-    (22) relational -> . relational LT additive
-    (23) relational -> . relational GT additive
-    (24) relational -> . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (0) S' -> . program
+    (1) program -> . sequence
+    (3) sequence -> . declaration
+    (4) sequence -> . sequence declaration
+    (5) declaration -> . VARIABLE ID WORTH expression SEMICOLON
+    (6) declaration -> . VARIABLE ID SEMICOLON
+    (7) declaration -> . statement
+    (8) statement -> . expression SEMICOLON
+    (9) statement -> . DISPLAY expression SEMICOLON
+    (10) statement -> . if_statement
+    (11) statement -> . block
+    (13) expression -> . assignment
+    (12) if_statement -> . IF expression THEN statement
+    (2) block -> . LBRAC sequence RBRAC
+    (14) assignment -> . logical_or
+    (15) assignment -> . ID WORTH assignment
+    (16) logical_or -> . logical_or OR logical_and
+    (17) logical_or -> . logical_and
+    (18) logical_and -> . logical_and AND equality
+    (19) logical_and -> . equality
+    (20) equality -> . equality EQUAL relational
+    (21) equality -> . equality NE relational
+    (22) equality -> . relational
+    (23) relational -> . relational LTE additive
+    (24) relational -> . relational GTE additive
+    (25) relational -> . relational LT additive
+    (26) relational -> . relational GT additive
+    (27) relational -> . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    VARIABLE        shift and go to state 3
-    DISPLAY         shift and go to state 7
-    IF              shift and go to state 10
-    ID              shift and go to state 4
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    VARIABLE        shift and go to state 4
+    DISPLAY         shift and go to state 8
+    IF              shift and go to state 12
+    LBRAC           shift and go to state 13
+    ID              shift and go to state 5
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
-    sequence                       shift and go to state 1
-    declaration                    shift and go to state 2
-    expression                     shift and go to state 5
-    statement                      shift and go to state 6
-    if_statement                   shift and go to state 8
-    assignment                     shift and go to state 9
-    logical_or                     shift and go to state 11
-    logical_and                    shift and go to state 12
-    equality                       shift and go to state 13
-    relational                     shift and go to state 14
-    additive                       shift and go to state 15
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
+    program                        shift and go to state 1
+    sequence                       shift and go to state 2
+    declaration                    shift and go to state 3
+    expression                     shift and go to state 6
+    statement                      shift and go to state 7
+    if_statement                   shift and go to state 9
+    block                          shift and go to state 10
+    assignment                     shift and go to state 11
+    logical_or                     shift and go to state 14
+    logical_and                    shift and go to state 15
+    equality                       shift and go to state 16
+    relational                     shift and go to state 17
+    additive                       shift and go to state 18
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 1
 
-    (0) S' -> sequence .
-    (2) sequence -> sequence . declaration
-    (3) declaration -> . VARIABLE ID WORTH expression SEMICOLON
-    (4) declaration -> . VARIABLE ID SEMICOLON
-    (5) declaration -> . statement
-    (6) statement -> . expression SEMICOLON
-    (7) statement -> . DISPLAY expression SEMICOLON
-    (8) statement -> . if_statement
-    (10) expression -> . assignment
-    (9) if_statement -> . IF expression THEN statement
-    (11) assignment -> . logical_or
-    (12) assignment -> . ID WORTH assignment
-    (13) logical_or -> . logical_or OR logical_and
-    (14) logical_or -> . logical_and
-    (15) logical_and -> . logical_and AND equality
-    (16) logical_and -> . equality
-    (17) equality -> . equality EQUAL relational
-    (18) equality -> . equality NE relational
-    (19) equality -> . relational
-    (20) relational -> . relational LTE additive
-    (21) relational -> . relational GTE additive
-    (22) relational -> . relational LT additive
-    (23) relational -> . relational GT additive
-    (24) relational -> . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (0) S' -> program .
 
-    VARIABLE        shift and go to state 3
-    DISPLAY         shift and go to state 7
-    IF              shift and go to state 10
-    ID              shift and go to state 4
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
 
-    declaration                    shift and go to state 25
-    expression                     shift and go to state 5
-    statement                      shift and go to state 6
-    if_statement                   shift and go to state 8
-    assignment                     shift and go to state 9
-    logical_or                     shift and go to state 11
-    logical_and                    shift and go to state 12
-    equality                       shift and go to state 13
-    relational                     shift and go to state 14
-    additive                       shift and go to state 15
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
 
 state 2
 
-    (1) sequence -> declaration .
+    (1) program -> sequence .
+    (4) sequence -> sequence . declaration
+    (5) declaration -> . VARIABLE ID WORTH expression SEMICOLON
+    (6) declaration -> . VARIABLE ID SEMICOLON
+    (7) declaration -> . statement
+    (8) statement -> . expression SEMICOLON
+    (9) statement -> . DISPLAY expression SEMICOLON
+    (10) statement -> . if_statement
+    (11) statement -> . block
+    (13) expression -> . assignment
+    (12) if_statement -> . IF expression THEN statement
+    (2) block -> . LBRAC sequence RBRAC
+    (14) assignment -> . logical_or
+    (15) assignment -> . ID WORTH assignment
+    (16) logical_or -> . logical_or OR logical_and
+    (17) logical_or -> . logical_and
+    (18) logical_and -> . logical_and AND equality
+    (19) logical_and -> . equality
+    (20) equality -> . equality EQUAL relational
+    (21) equality -> . equality NE relational
+    (22) equality -> . relational
+    (23) relational -> . relational LTE additive
+    (24) relational -> . relational GTE additive
+    (25) relational -> . relational LT additive
+    (26) relational -> . relational GT additive
+    (27) relational -> . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    VARIABLE        reduce using rule 1 (sequence -> declaration .)
-    DISPLAY         reduce using rule 1 (sequence -> declaration .)
-    IF              reduce using rule 1 (sequence -> declaration .)
-    ID              reduce using rule 1 (sequence -> declaration .)
-    MINUS           reduce using rule 1 (sequence -> declaration .)
-    NOT             reduce using rule 1 (sequence -> declaration .)
-    NUMBER          reduce using rule 1 (sequence -> declaration .)
-    BOOLEAN         reduce using rule 1 (sequence -> declaration .)
-    LPAREN          reduce using rule 1 (sequence -> declaration .)
-    STRING          reduce using rule 1 (sequence -> declaration .)
-    $end            reduce using rule 1 (sequence -> declaration .)
+    $end            reduce using rule 1 (program -> sequence .)
+    VARIABLE        shift and go to state 4
+    DISPLAY         shift and go to state 8
+    IF              shift and go to state 12
+    LBRAC           shift and go to state 13
+    ID              shift and go to state 5
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
+    declaration                    shift and go to state 28
+    expression                     shift and go to state 6
+    statement                      shift and go to state 7
+    if_statement                   shift and go to state 9
+    block                          shift and go to state 10
+    assignment                     shift and go to state 11
+    logical_or                     shift and go to state 14
+    logical_and                    shift and go to state 15
+    equality                       shift and go to state 16
+    relational                     shift and go to state 17
+    additive                       shift and go to state 18
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 3
 
-    (3) declaration -> VARIABLE . ID WORTH expression SEMICOLON
-    (4) declaration -> VARIABLE . ID SEMICOLON
+    (3) sequence -> declaration .
 
-    ID              shift and go to state 26
+    VARIABLE        reduce using rule 3 (sequence -> declaration .)
+    DISPLAY         reduce using rule 3 (sequence -> declaration .)
+    IF              reduce using rule 3 (sequence -> declaration .)
+    LBRAC           reduce using rule 3 (sequence -> declaration .)
+    ID              reduce using rule 3 (sequence -> declaration .)
+    MINUS           reduce using rule 3 (sequence -> declaration .)
+    NOT             reduce using rule 3 (sequence -> declaration .)
+    NUMBER          reduce using rule 3 (sequence -> declaration .)
+    BOOLEAN         reduce using rule 3 (sequence -> declaration .)
+    LPAREN          reduce using rule 3 (sequence -> declaration .)
+    STRING          reduce using rule 3 (sequence -> declaration .)
+    $end            reduce using rule 3 (sequence -> declaration .)
+    RBRAC           reduce using rule 3 (sequence -> declaration .)
 
 
 state 4
 
-    (12) assignment -> ID . WORTH assignment
-    (34) primary -> ID .
+    (5) declaration -> VARIABLE . ID WORTH expression SEMICOLON
+    (6) declaration -> VARIABLE . ID SEMICOLON
 
-    WORTH           shift and go to state 27
-    TIMES           reduce using rule 34 (primary -> ID .)
-    DIVIDE          reduce using rule 34 (primary -> ID .)
-    MINUS           reduce using rule 34 (primary -> ID .)
-    PLUS            reduce using rule 34 (primary -> ID .)
-    LTE             reduce using rule 34 (primary -> ID .)
-    GTE             reduce using rule 34 (primary -> ID .)
-    LT              reduce using rule 34 (primary -> ID .)
-    GT              reduce using rule 34 (primary -> ID .)
-    EQUAL           reduce using rule 34 (primary -> ID .)
-    NE              reduce using rule 34 (primary -> ID .)
-    AND             reduce using rule 34 (primary -> ID .)
-    OR              reduce using rule 34 (primary -> ID .)
-    SEMICOLON       reduce using rule 34 (primary -> ID .)
-    THEN            reduce using rule 34 (primary -> ID .)
-    RPAREN          reduce using rule 34 (primary -> ID .)
+    ID              shift and go to state 29
 
 
 state 5
 
-    (6) statement -> expression . SEMICOLON
+    (15) assignment -> ID . WORTH assignment
+    (37) primary -> ID .
 
-    SEMICOLON       shift and go to state 28
+    WORTH           shift and go to state 30
+    TIMES           reduce using rule 37 (primary -> ID .)
+    DIVIDE          reduce using rule 37 (primary -> ID .)
+    MINUS           reduce using rule 37 (primary -> ID .)
+    PLUS            reduce using rule 37 (primary -> ID .)
+    LTE             reduce using rule 37 (primary -> ID .)
+    GTE             reduce using rule 37 (primary -> ID .)
+    LT              reduce using rule 37 (primary -> ID .)
+    GT              reduce using rule 37 (primary -> ID .)
+    EQUAL           reduce using rule 37 (primary -> ID .)
+    NE              reduce using rule 37 (primary -> ID .)
+    AND             reduce using rule 37 (primary -> ID .)
+    OR              reduce using rule 37 (primary -> ID .)
+    SEMICOLON       reduce using rule 37 (primary -> ID .)
+    THEN            reduce using rule 37 (primary -> ID .)
+    RPAREN          reduce using rule 37 (primary -> ID .)
 
 
 state 6
 
-    (5) declaration -> statement .
+    (8) statement -> expression . SEMICOLON
 
-    VARIABLE        reduce using rule 5 (declaration -> statement .)
-    DISPLAY         reduce using rule 5 (declaration -> statement .)
-    IF              reduce using rule 5 (declaration -> statement .)
-    ID              reduce using rule 5 (declaration -> statement .)
-    MINUS           reduce using rule 5 (declaration -> statement .)
-    NOT             reduce using rule 5 (declaration -> statement .)
-    NUMBER          reduce using rule 5 (declaration -> statement .)
-    BOOLEAN         reduce using rule 5 (declaration -> statement .)
-    LPAREN          reduce using rule 5 (declaration -> statement .)
-    STRING          reduce using rule 5 (declaration -> statement .)
-    $end            reduce using rule 5 (declaration -> statement .)
+    SEMICOLON       shift and go to state 31
 
 
 state 7
 
-    (7) statement -> DISPLAY . expression SEMICOLON
-    (10) expression -> . assignment
-    (11) assignment -> . logical_or
-    (12) assignment -> . ID WORTH assignment
-    (13) logical_or -> . logical_or OR logical_and
-    (14) logical_or -> . logical_and
-    (15) logical_and -> . logical_and AND equality
-    (16) logical_and -> . equality
-    (17) equality -> . equality EQUAL relational
-    (18) equality -> . equality NE relational
-    (19) equality -> . relational
-    (20) relational -> . relational LTE additive
-    (21) relational -> . relational GTE additive
-    (22) relational -> . relational LT additive
-    (23) relational -> . relational GT additive
-    (24) relational -> . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (7) declaration -> statement .
 
-    ID              shift and go to state 4
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    VARIABLE        reduce using rule 7 (declaration -> statement .)
+    DISPLAY         reduce using rule 7 (declaration -> statement .)
+    IF              reduce using rule 7 (declaration -> statement .)
+    LBRAC           reduce using rule 7 (declaration -> statement .)
+    ID              reduce using rule 7 (declaration -> statement .)
+    MINUS           reduce using rule 7 (declaration -> statement .)
+    NOT             reduce using rule 7 (declaration -> statement .)
+    NUMBER          reduce using rule 7 (declaration -> statement .)
+    BOOLEAN         reduce using rule 7 (declaration -> statement .)
+    LPAREN          reduce using rule 7 (declaration -> statement .)
+    STRING          reduce using rule 7 (declaration -> statement .)
+    $end            reduce using rule 7 (declaration -> statement .)
+    RBRAC           reduce using rule 7 (declaration -> statement .)
 
-    expression                     shift and go to state 29
-    assignment                     shift and go to state 9
-    logical_or                     shift and go to state 11
-    logical_and                    shift and go to state 12
-    equality                       shift and go to state 13
-    relational                     shift and go to state 14
-    additive                       shift and go to state 15
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
 
 state 8
 
-    (8) statement -> if_statement .
+    (9) statement -> DISPLAY . expression SEMICOLON
+    (13) expression -> . assignment
+    (14) assignment -> . logical_or
+    (15) assignment -> . ID WORTH assignment
+    (16) logical_or -> . logical_or OR logical_and
+    (17) logical_or -> . logical_and
+    (18) logical_and -> . logical_and AND equality
+    (19) logical_and -> . equality
+    (20) equality -> . equality EQUAL relational
+    (21) equality -> . equality NE relational
+    (22) equality -> . relational
+    (23) relational -> . relational LTE additive
+    (24) relational -> . relational GTE additive
+    (25) relational -> . relational LT additive
+    (26) relational -> . relational GT additive
+    (27) relational -> . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    VARIABLE        reduce using rule 8 (statement -> if_statement .)
-    DISPLAY         reduce using rule 8 (statement -> if_statement .)
-    IF              reduce using rule 8 (statement -> if_statement .)
-    ID              reduce using rule 8 (statement -> if_statement .)
-    MINUS           reduce using rule 8 (statement -> if_statement .)
-    NOT             reduce using rule 8 (statement -> if_statement .)
-    NUMBER          reduce using rule 8 (statement -> if_statement .)
-    BOOLEAN         reduce using rule 8 (statement -> if_statement .)
-    LPAREN          reduce using rule 8 (statement -> if_statement .)
-    STRING          reduce using rule 8 (statement -> if_statement .)
-    $end            reduce using rule 8 (statement -> if_statement .)
+    ID              shift and go to state 5
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
+    expression                     shift and go to state 32
+    assignment                     shift and go to state 11
+    logical_or                     shift and go to state 14
+    logical_and                    shift and go to state 15
+    equality                       shift and go to state 16
+    relational                     shift and go to state 17
+    additive                       shift and go to state 18
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 9
 
-    (10) expression -> assignment .
+    (10) statement -> if_statement .
 
-    SEMICOLON       reduce using rule 10 (expression -> assignment .)
-    THEN            reduce using rule 10 (expression -> assignment .)
-    RPAREN          reduce using rule 10 (expression -> assignment .)
+    VARIABLE        reduce using rule 10 (statement -> if_statement .)
+    DISPLAY         reduce using rule 10 (statement -> if_statement .)
+    IF              reduce using rule 10 (statement -> if_statement .)
+    LBRAC           reduce using rule 10 (statement -> if_statement .)
+    ID              reduce using rule 10 (statement -> if_statement .)
+    MINUS           reduce using rule 10 (statement -> if_statement .)
+    NOT             reduce using rule 10 (statement -> if_statement .)
+    NUMBER          reduce using rule 10 (statement -> if_statement .)
+    BOOLEAN         reduce using rule 10 (statement -> if_statement .)
+    LPAREN          reduce using rule 10 (statement -> if_statement .)
+    STRING          reduce using rule 10 (statement -> if_statement .)
+    $end            reduce using rule 10 (statement -> if_statement .)
+    RBRAC           reduce using rule 10 (statement -> if_statement .)
 
 
 state 10
 
-    (9) if_statement -> IF . expression THEN statement
-    (10) expression -> . assignment
-    (11) assignment -> . logical_or
-    (12) assignment -> . ID WORTH assignment
-    (13) logical_or -> . logical_or OR logical_and
-    (14) logical_or -> . logical_and
-    (15) logical_and -> . logical_and AND equality
-    (16) logical_and -> . equality
-    (17) equality -> . equality EQUAL relational
-    (18) equality -> . equality NE relational
-    (19) equality -> . relational
-    (20) relational -> . relational LTE additive
-    (21) relational -> . relational GTE additive
-    (22) relational -> . relational LT additive
-    (23) relational -> . relational GT additive
-    (24) relational -> . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (11) statement -> block .
 
-    ID              shift and go to state 4
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    VARIABLE        reduce using rule 11 (statement -> block .)
+    DISPLAY         reduce using rule 11 (statement -> block .)
+    IF              reduce using rule 11 (statement -> block .)
+    LBRAC           reduce using rule 11 (statement -> block .)
+    ID              reduce using rule 11 (statement -> block .)
+    MINUS           reduce using rule 11 (statement -> block .)
+    NOT             reduce using rule 11 (statement -> block .)
+    NUMBER          reduce using rule 11 (statement -> block .)
+    BOOLEAN         reduce using rule 11 (statement -> block .)
+    LPAREN          reduce using rule 11 (statement -> block .)
+    STRING          reduce using rule 11 (statement -> block .)
+    $end            reduce using rule 11 (statement -> block .)
+    RBRAC           reduce using rule 11 (statement -> block .)
 
-    expression                     shift and go to state 30
-    assignment                     shift and go to state 9
-    logical_or                     shift and go to state 11
-    logical_and                    shift and go to state 12
-    equality                       shift and go to state 13
-    relational                     shift and go to state 14
-    additive                       shift and go to state 15
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
 
 state 11
 
-    (11) assignment -> logical_or .
-    (13) logical_or -> logical_or . OR logical_and
+    (13) expression -> assignment .
 
-    SEMICOLON       reduce using rule 11 (assignment -> logical_or .)
-    THEN            reduce using rule 11 (assignment -> logical_or .)
-    RPAREN          reduce using rule 11 (assignment -> logical_or .)
-    OR              shift and go to state 31
+    SEMICOLON       reduce using rule 13 (expression -> assignment .)
+    THEN            reduce using rule 13 (expression -> assignment .)
+    RPAREN          reduce using rule 13 (expression -> assignment .)
 
 
 state 12
 
-    (14) logical_or -> logical_and .
-    (15) logical_and -> logical_and . AND equality
+    (12) if_statement -> IF . expression THEN statement
+    (13) expression -> . assignment
+    (14) assignment -> . logical_or
+    (15) assignment -> . ID WORTH assignment
+    (16) logical_or -> . logical_or OR logical_and
+    (17) logical_or -> . logical_and
+    (18) logical_and -> . logical_and AND equality
+    (19) logical_and -> . equality
+    (20) equality -> . equality EQUAL relational
+    (21) equality -> . equality NE relational
+    (22) equality -> . relational
+    (23) relational -> . relational LTE additive
+    (24) relational -> . relational GTE additive
+    (25) relational -> . relational LT additive
+    (26) relational -> . relational GT additive
+    (27) relational -> . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    OR              reduce using rule 14 (logical_or -> logical_and .)
-    SEMICOLON       reduce using rule 14 (logical_or -> logical_and .)
-    THEN            reduce using rule 14 (logical_or -> logical_and .)
-    RPAREN          reduce using rule 14 (logical_or -> logical_and .)
-    AND             shift and go to state 32
+    ID              shift and go to state 5
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
+    expression                     shift and go to state 33
+    assignment                     shift and go to state 11
+    logical_or                     shift and go to state 14
+    logical_and                    shift and go to state 15
+    equality                       shift and go to state 16
+    relational                     shift and go to state 17
+    additive                       shift and go to state 18
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 13
 
-    (16) logical_and -> equality .
-    (17) equality -> equality . EQUAL relational
-    (18) equality -> equality . NE relational
+    (2) block -> LBRAC . sequence RBRAC
+    (3) sequence -> . declaration
+    (4) sequence -> . sequence declaration
+    (5) declaration -> . VARIABLE ID WORTH expression SEMICOLON
+    (6) declaration -> . VARIABLE ID SEMICOLON
+    (7) declaration -> . statement
+    (8) statement -> . expression SEMICOLON
+    (9) statement -> . DISPLAY expression SEMICOLON
+    (10) statement -> . if_statement
+    (11) statement -> . block
+    (13) expression -> . assignment
+    (12) if_statement -> . IF expression THEN statement
+    (2) block -> . LBRAC sequence RBRAC
+    (14) assignment -> . logical_or
+    (15) assignment -> . ID WORTH assignment
+    (16) logical_or -> . logical_or OR logical_and
+    (17) logical_or -> . logical_and
+    (18) logical_and -> . logical_and AND equality
+    (19) logical_and -> . equality
+    (20) equality -> . equality EQUAL relational
+    (21) equality -> . equality NE relational
+    (22) equality -> . relational
+    (23) relational -> . relational LTE additive
+    (24) relational -> . relational GTE additive
+    (25) relational -> . relational LT additive
+    (26) relational -> . relational GT additive
+    (27) relational -> . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    AND             reduce using rule 16 (logical_and -> equality .)
-    OR              reduce using rule 16 (logical_and -> equality .)
-    SEMICOLON       reduce using rule 16 (logical_and -> equality .)
-    THEN            reduce using rule 16 (logical_and -> equality .)
-    RPAREN          reduce using rule 16 (logical_and -> equality .)
-    EQUAL           shift and go to state 33
-    NE              shift and go to state 34
+    VARIABLE        shift and go to state 4
+    DISPLAY         shift and go to state 8
+    IF              shift and go to state 12
+    LBRAC           shift and go to state 13
+    ID              shift and go to state 5
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
+    sequence                       shift and go to state 34
+    declaration                    shift and go to state 3
+    expression                     shift and go to state 6
+    statement                      shift and go to state 7
+    if_statement                   shift and go to state 9
+    block                          shift and go to state 10
+    assignment                     shift and go to state 11
+    logical_or                     shift and go to state 14
+    logical_and                    shift and go to state 15
+    equality                       shift and go to state 16
+    relational                     shift and go to state 17
+    additive                       shift and go to state 18
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 14
 
-    (19) equality -> relational .
-    (20) relational -> relational . LTE additive
-    (21) relational -> relational . GTE additive
-    (22) relational -> relational . LT additive
-    (23) relational -> relational . GT additive
+    (14) assignment -> logical_or .
+    (16) logical_or -> logical_or . OR logical_and
 
-    EQUAL           reduce using rule 19 (equality -> relational .)
-    NE              reduce using rule 19 (equality -> relational .)
-    AND             reduce using rule 19 (equality -> relational .)
-    OR              reduce using rule 19 (equality -> relational .)
-    SEMICOLON       reduce using rule 19 (equality -> relational .)
-    THEN            reduce using rule 19 (equality -> relational .)
-    RPAREN          reduce using rule 19 (equality -> relational .)
-    LTE             shift and go to state 35
-    GTE             shift and go to state 36
-    LT              shift and go to state 37
-    GT              shift and go to state 38
+    SEMICOLON       reduce using rule 14 (assignment -> logical_or .)
+    THEN            reduce using rule 14 (assignment -> logical_or .)
+    RPAREN          reduce using rule 14 (assignment -> logical_or .)
+    OR              shift and go to state 35
 
 
 state 15
 
-    (24) relational -> additive .
-    (25) additive -> additive . MINUS multiplicative
-    (26) additive -> additive . PLUS multiplicative
+    (17) logical_or -> logical_and .
+    (18) logical_and -> logical_and . AND equality
 
-    LTE             reduce using rule 24 (relational -> additive .)
-    GTE             reduce using rule 24 (relational -> additive .)
-    LT              reduce using rule 24 (relational -> additive .)
-    GT              reduce using rule 24 (relational -> additive .)
-    EQUAL           reduce using rule 24 (relational -> additive .)
-    NE              reduce using rule 24 (relational -> additive .)
-    AND             reduce using rule 24 (relational -> additive .)
-    OR              reduce using rule 24 (relational -> additive .)
-    SEMICOLON       reduce using rule 24 (relational -> additive .)
-    THEN            reduce using rule 24 (relational -> additive .)
-    RPAREN          reduce using rule 24 (relational -> additive .)
-    MINUS           shift and go to state 39
-    PLUS            shift and go to state 40
+    OR              reduce using rule 17 (logical_or -> logical_and .)
+    SEMICOLON       reduce using rule 17 (logical_or -> logical_and .)
+    THEN            reduce using rule 17 (logical_or -> logical_and .)
+    RPAREN          reduce using rule 17 (logical_or -> logical_and .)
+    AND             shift and go to state 36
 
 
 state 16
 
-    (31) unary -> MINUS . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (19) logical_and -> equality .
+    (20) equality -> equality . EQUAL relational
+    (21) equality -> equality . NE relational
 
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    ID              shift and go to state 42
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    AND             reduce using rule 19 (logical_and -> equality .)
+    OR              reduce using rule 19 (logical_and -> equality .)
+    SEMICOLON       reduce using rule 19 (logical_and -> equality .)
+    THEN            reduce using rule 19 (logical_and -> equality .)
+    RPAREN          reduce using rule 19 (logical_and -> equality .)
+    EQUAL           shift and go to state 37
+    NE              shift and go to state 38
 
-    unary                          shift and go to state 41
-    primary                        shift and go to state 20
 
 state 17
 
-    (27) additive -> multiplicative .
-    (28) multiplicative -> multiplicative . TIMES unary
-    (29) multiplicative -> multiplicative . DIVIDE unary
+    (22) equality -> relational .
+    (23) relational -> relational . LTE additive
+    (24) relational -> relational . GTE additive
+    (25) relational -> relational . LT additive
+    (26) relational -> relational . GT additive
 
-    MINUS           reduce using rule 27 (additive -> multiplicative .)
-    PLUS            reduce using rule 27 (additive -> multiplicative .)
-    LTE             reduce using rule 27 (additive -> multiplicative .)
-    GTE             reduce using rule 27 (additive -> multiplicative .)
-    LT              reduce using rule 27 (additive -> multiplicative .)
-    GT              reduce using rule 27 (additive -> multiplicative .)
-    EQUAL           reduce using rule 27 (additive -> multiplicative .)
-    NE              reduce using rule 27 (additive -> multiplicative .)
-    AND             reduce using rule 27 (additive -> multiplicative .)
-    OR              reduce using rule 27 (additive -> multiplicative .)
-    SEMICOLON       reduce using rule 27 (additive -> multiplicative .)
-    THEN            reduce using rule 27 (additive -> multiplicative .)
-    RPAREN          reduce using rule 27 (additive -> multiplicative .)
-    TIMES           shift and go to state 43
-    DIVIDE          shift and go to state 44
+    EQUAL           reduce using rule 22 (equality -> relational .)
+    NE              reduce using rule 22 (equality -> relational .)
+    AND             reduce using rule 22 (equality -> relational .)
+    OR              reduce using rule 22 (equality -> relational .)
+    SEMICOLON       reduce using rule 22 (equality -> relational .)
+    THEN            reduce using rule 22 (equality -> relational .)
+    RPAREN          reduce using rule 22 (equality -> relational .)
+    LTE             shift and go to state 39
+    GTE             shift and go to state 40
+    LT              shift and go to state 41
+    GT              shift and go to state 42
 
 
 state 18
 
-    (30) multiplicative -> unary .
+    (27) relational -> additive .
+    (28) additive -> additive . MINUS multiplicative
+    (29) additive -> additive . PLUS multiplicative
 
-    TIMES           reduce using rule 30 (multiplicative -> unary .)
-    DIVIDE          reduce using rule 30 (multiplicative -> unary .)
-    MINUS           reduce using rule 30 (multiplicative -> unary .)
-    PLUS            reduce using rule 30 (multiplicative -> unary .)
-    LTE             reduce using rule 30 (multiplicative -> unary .)
-    GTE             reduce using rule 30 (multiplicative -> unary .)
-    LT              reduce using rule 30 (multiplicative -> unary .)
-    GT              reduce using rule 30 (multiplicative -> unary .)
-    EQUAL           reduce using rule 30 (multiplicative -> unary .)
-    NE              reduce using rule 30 (multiplicative -> unary .)
-    AND             reduce using rule 30 (multiplicative -> unary .)
-    OR              reduce using rule 30 (multiplicative -> unary .)
-    SEMICOLON       reduce using rule 30 (multiplicative -> unary .)
-    THEN            reduce using rule 30 (multiplicative -> unary .)
-    RPAREN          reduce using rule 30 (multiplicative -> unary .)
+    LTE             reduce using rule 27 (relational -> additive .)
+    GTE             reduce using rule 27 (relational -> additive .)
+    LT              reduce using rule 27 (relational -> additive .)
+    GT              reduce using rule 27 (relational -> additive .)
+    EQUAL           reduce using rule 27 (relational -> additive .)
+    NE              reduce using rule 27 (relational -> additive .)
+    AND             reduce using rule 27 (relational -> additive .)
+    OR              reduce using rule 27 (relational -> additive .)
+    SEMICOLON       reduce using rule 27 (relational -> additive .)
+    THEN            reduce using rule 27 (relational -> additive .)
+    RPAREN          reduce using rule 27 (relational -> additive .)
+    MINUS           shift and go to state 43
+    PLUS            shift and go to state 44
 
 
 state 19
 
-    (32) unary -> NOT . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (34) unary -> MINUS . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    ID              shift and go to state 42
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    ID              shift and go to state 46
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
     unary                          shift and go to state 45
-    primary                        shift and go to state 20
+    primary                        shift and go to state 23
 
 state 20
 
-    (33) unary -> primary .
+    (30) additive -> multiplicative .
+    (31) multiplicative -> multiplicative . TIMES unary
+    (32) multiplicative -> multiplicative . DIVIDE unary
 
-    TIMES           reduce using rule 33 (unary -> primary .)
-    DIVIDE          reduce using rule 33 (unary -> primary .)
-    MINUS           reduce using rule 33 (unary -> primary .)
-    PLUS            reduce using rule 33 (unary -> primary .)
-    LTE             reduce using rule 33 (unary -> primary .)
-    GTE             reduce using rule 33 (unary -> primary .)
-    LT              reduce using rule 33 (unary -> primary .)
-    GT              reduce using rule 33 (unary -> primary .)
-    EQUAL           reduce using rule 33 (unary -> primary .)
-    NE              reduce using rule 33 (unary -> primary .)
-    AND             reduce using rule 33 (unary -> primary .)
-    OR              reduce using rule 33 (unary -> primary .)
-    SEMICOLON       reduce using rule 33 (unary -> primary .)
-    THEN            reduce using rule 33 (unary -> primary .)
-    RPAREN          reduce using rule 33 (unary -> primary .)
+    MINUS           reduce using rule 30 (additive -> multiplicative .)
+    PLUS            reduce using rule 30 (additive -> multiplicative .)
+    LTE             reduce using rule 30 (additive -> multiplicative .)
+    GTE             reduce using rule 30 (additive -> multiplicative .)
+    LT              reduce using rule 30 (additive -> multiplicative .)
+    GT              reduce using rule 30 (additive -> multiplicative .)
+    EQUAL           reduce using rule 30 (additive -> multiplicative .)
+    NE              reduce using rule 30 (additive -> multiplicative .)
+    AND             reduce using rule 30 (additive -> multiplicative .)
+    OR              reduce using rule 30 (additive -> multiplicative .)
+    SEMICOLON       reduce using rule 30 (additive -> multiplicative .)
+    THEN            reduce using rule 30 (additive -> multiplicative .)
+    RPAREN          reduce using rule 30 (additive -> multiplicative .)
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
 
 
 state 21
 
-    (35) primary -> NUMBER .
+    (33) multiplicative -> unary .
 
-    TIMES           reduce using rule 35 (primary -> NUMBER .)
-    DIVIDE          reduce using rule 35 (primary -> NUMBER .)
-    MINUS           reduce using rule 35 (primary -> NUMBER .)
-    PLUS            reduce using rule 35 (primary -> NUMBER .)
-    LTE             reduce using rule 35 (primary -> NUMBER .)
-    GTE             reduce using rule 35 (primary -> NUMBER .)
-    LT              reduce using rule 35 (primary -> NUMBER .)
-    GT              reduce using rule 35 (primary -> NUMBER .)
-    EQUAL           reduce using rule 35 (primary -> NUMBER .)
-    NE              reduce using rule 35 (primary -> NUMBER .)
-    AND             reduce using rule 35 (primary -> NUMBER .)
-    OR              reduce using rule 35 (primary -> NUMBER .)
-    SEMICOLON       reduce using rule 35 (primary -> NUMBER .)
-    THEN            reduce using rule 35 (primary -> NUMBER .)
-    RPAREN          reduce using rule 35 (primary -> NUMBER .)
+    TIMES           reduce using rule 33 (multiplicative -> unary .)
+    DIVIDE          reduce using rule 33 (multiplicative -> unary .)
+    MINUS           reduce using rule 33 (multiplicative -> unary .)
+    PLUS            reduce using rule 33 (multiplicative -> unary .)
+    LTE             reduce using rule 33 (multiplicative -> unary .)
+    GTE             reduce using rule 33 (multiplicative -> unary .)
+    LT              reduce using rule 33 (multiplicative -> unary .)
+    GT              reduce using rule 33 (multiplicative -> unary .)
+    EQUAL           reduce using rule 33 (multiplicative -> unary .)
+    NE              reduce using rule 33 (multiplicative -> unary .)
+    AND             reduce using rule 33 (multiplicative -> unary .)
+    OR              reduce using rule 33 (multiplicative -> unary .)
+    SEMICOLON       reduce using rule 33 (multiplicative -> unary .)
+    THEN            reduce using rule 33 (multiplicative -> unary .)
+    RPAREN          reduce using rule 33 (multiplicative -> unary .)
 
 
 state 22
 
-    (36) primary -> BOOLEAN .
+    (35) unary -> NOT . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    TIMES           reduce using rule 36 (primary -> BOOLEAN .)
-    DIVIDE          reduce using rule 36 (primary -> BOOLEAN .)
-    MINUS           reduce using rule 36 (primary -> BOOLEAN .)
-    PLUS            reduce using rule 36 (primary -> BOOLEAN .)
-    LTE             reduce using rule 36 (primary -> BOOLEAN .)
-    GTE             reduce using rule 36 (primary -> BOOLEAN .)
-    LT              reduce using rule 36 (primary -> BOOLEAN .)
-    GT              reduce using rule 36 (primary -> BOOLEAN .)
-    EQUAL           reduce using rule 36 (primary -> BOOLEAN .)
-    NE              reduce using rule 36 (primary -> BOOLEAN .)
-    AND             reduce using rule 36 (primary -> BOOLEAN .)
-    OR              reduce using rule 36 (primary -> BOOLEAN .)
-    SEMICOLON       reduce using rule 36 (primary -> BOOLEAN .)
-    THEN            reduce using rule 36 (primary -> BOOLEAN .)
-    RPAREN          reduce using rule 36 (primary -> BOOLEAN .)
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    ID              shift and go to state 46
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
+    unary                          shift and go to state 49
+    primary                        shift and go to state 23
 
 state 23
 
-    (37) primary -> LPAREN . expression RPAREN
-    (10) expression -> . assignment
-    (11) assignment -> . logical_or
-    (12) assignment -> . ID WORTH assignment
-    (13) logical_or -> . logical_or OR logical_and
-    (14) logical_or -> . logical_and
-    (15) logical_and -> . logical_and AND equality
-    (16) logical_and -> . equality
-    (17) equality -> . equality EQUAL relational
-    (18) equality -> . equality NE relational
-    (19) equality -> . relational
-    (20) relational -> . relational LTE additive
-    (21) relational -> . relational GTE additive
-    (22) relational -> . relational LT additive
-    (23) relational -> . relational GT additive
-    (24) relational -> . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (36) unary -> primary .
 
-    ID              shift and go to state 4
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    TIMES           reduce using rule 36 (unary -> primary .)
+    DIVIDE          reduce using rule 36 (unary -> primary .)
+    MINUS           reduce using rule 36 (unary -> primary .)
+    PLUS            reduce using rule 36 (unary -> primary .)
+    LTE             reduce using rule 36 (unary -> primary .)
+    GTE             reduce using rule 36 (unary -> primary .)
+    LT              reduce using rule 36 (unary -> primary .)
+    GT              reduce using rule 36 (unary -> primary .)
+    EQUAL           reduce using rule 36 (unary -> primary .)
+    NE              reduce using rule 36 (unary -> primary .)
+    AND             reduce using rule 36 (unary -> primary .)
+    OR              reduce using rule 36 (unary -> primary .)
+    SEMICOLON       reduce using rule 36 (unary -> primary .)
+    THEN            reduce using rule 36 (unary -> primary .)
+    RPAREN          reduce using rule 36 (unary -> primary .)
 
-    expression                     shift and go to state 46
-    assignment                     shift and go to state 9
-    logical_or                     shift and go to state 11
-    logical_and                    shift and go to state 12
-    equality                       shift and go to state 13
-    relational                     shift and go to state 14
-    additive                       shift and go to state 15
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
 
 state 24
 
-    (38) primary -> STRING .
+    (38) primary -> NUMBER .
 
-    TIMES           reduce using rule 38 (primary -> STRING .)
-    DIVIDE          reduce using rule 38 (primary -> STRING .)
-    MINUS           reduce using rule 38 (primary -> STRING .)
-    PLUS            reduce using rule 38 (primary -> STRING .)
-    LTE             reduce using rule 38 (primary -> STRING .)
-    GTE             reduce using rule 38 (primary -> STRING .)
-    LT              reduce using rule 38 (primary -> STRING .)
-    GT              reduce using rule 38 (primary -> STRING .)
-    EQUAL           reduce using rule 38 (primary -> STRING .)
-    NE              reduce using rule 38 (primary -> STRING .)
-    AND             reduce using rule 38 (primary -> STRING .)
-    OR              reduce using rule 38 (primary -> STRING .)
-    SEMICOLON       reduce using rule 38 (primary -> STRING .)
-    THEN            reduce using rule 38 (primary -> STRING .)
-    RPAREN          reduce using rule 38 (primary -> STRING .)
+    TIMES           reduce using rule 38 (primary -> NUMBER .)
+    DIVIDE          reduce using rule 38 (primary -> NUMBER .)
+    MINUS           reduce using rule 38 (primary -> NUMBER .)
+    PLUS            reduce using rule 38 (primary -> NUMBER .)
+    LTE             reduce using rule 38 (primary -> NUMBER .)
+    GTE             reduce using rule 38 (primary -> NUMBER .)
+    LT              reduce using rule 38 (primary -> NUMBER .)
+    GT              reduce using rule 38 (primary -> NUMBER .)
+    EQUAL           reduce using rule 38 (primary -> NUMBER .)
+    NE              reduce using rule 38 (primary -> NUMBER .)
+    AND             reduce using rule 38 (primary -> NUMBER .)
+    OR              reduce using rule 38 (primary -> NUMBER .)
+    SEMICOLON       reduce using rule 38 (primary -> NUMBER .)
+    THEN            reduce using rule 38 (primary -> NUMBER .)
+    RPAREN          reduce using rule 38 (primary -> NUMBER .)
 
 
 state 25
 
-    (2) sequence -> sequence declaration .
+    (39) primary -> BOOLEAN .
 
-    VARIABLE        reduce using rule 2 (sequence -> sequence declaration .)
-    DISPLAY         reduce using rule 2 (sequence -> sequence declaration .)
-    IF              reduce using rule 2 (sequence -> sequence declaration .)
-    ID              reduce using rule 2 (sequence -> sequence declaration .)
-    MINUS           reduce using rule 2 (sequence -> sequence declaration .)
-    NOT             reduce using rule 2 (sequence -> sequence declaration .)
-    NUMBER          reduce using rule 2 (sequence -> sequence declaration .)
-    BOOLEAN         reduce using rule 2 (sequence -> sequence declaration .)
-    LPAREN          reduce using rule 2 (sequence -> sequence declaration .)
-    STRING          reduce using rule 2 (sequence -> sequence declaration .)
-    $end            reduce using rule 2 (sequence -> sequence declaration .)
+    TIMES           reduce using rule 39 (primary -> BOOLEAN .)
+    DIVIDE          reduce using rule 39 (primary -> BOOLEAN .)
+    MINUS           reduce using rule 39 (primary -> BOOLEAN .)
+    PLUS            reduce using rule 39 (primary -> BOOLEAN .)
+    LTE             reduce using rule 39 (primary -> BOOLEAN .)
+    GTE             reduce using rule 39 (primary -> BOOLEAN .)
+    LT              reduce using rule 39 (primary -> BOOLEAN .)
+    GT              reduce using rule 39 (primary -> BOOLEAN .)
+    EQUAL           reduce using rule 39 (primary -> BOOLEAN .)
+    NE              reduce using rule 39 (primary -> BOOLEAN .)
+    AND             reduce using rule 39 (primary -> BOOLEAN .)
+    OR              reduce using rule 39 (primary -> BOOLEAN .)
+    SEMICOLON       reduce using rule 39 (primary -> BOOLEAN .)
+    THEN            reduce using rule 39 (primary -> BOOLEAN .)
+    RPAREN          reduce using rule 39 (primary -> BOOLEAN .)
 
 
 state 26
 
-    (3) declaration -> VARIABLE ID . WORTH expression SEMICOLON
-    (4) declaration -> VARIABLE ID . SEMICOLON
+    (40) primary -> LPAREN . expression RPAREN
+    (13) expression -> . assignment
+    (14) assignment -> . logical_or
+    (15) assignment -> . ID WORTH assignment
+    (16) logical_or -> . logical_or OR logical_and
+    (17) logical_or -> . logical_and
+    (18) logical_and -> . logical_and AND equality
+    (19) logical_and -> . equality
+    (20) equality -> . equality EQUAL relational
+    (21) equality -> . equality NE relational
+    (22) equality -> . relational
+    (23) relational -> . relational LTE additive
+    (24) relational -> . relational GTE additive
+    (25) relational -> . relational LT additive
+    (26) relational -> . relational GT additive
+    (27) relational -> . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    WORTH           shift and go to state 47
-    SEMICOLON       shift and go to state 48
+    ID              shift and go to state 5
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
+    expression                     shift and go to state 50
+    assignment                     shift and go to state 11
+    logical_or                     shift and go to state 14
+    logical_and                    shift and go to state 15
+    equality                       shift and go to state 16
+    relational                     shift and go to state 17
+    additive                       shift and go to state 18
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 27
 
-    (12) assignment -> ID WORTH . assignment
-    (11) assignment -> . logical_or
-    (12) assignment -> . ID WORTH assignment
-    (13) logical_or -> . logical_or OR logical_and
-    (14) logical_or -> . logical_and
-    (15) logical_and -> . logical_and AND equality
-    (16) logical_and -> . equality
-    (17) equality -> . equality EQUAL relational
-    (18) equality -> . equality NE relational
-    (19) equality -> . relational
-    (20) relational -> . relational LTE additive
-    (21) relational -> . relational GTE additive
-    (22) relational -> . relational LT additive
-    (23) relational -> . relational GT additive
-    (24) relational -> . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (41) primary -> STRING .
 
-    ID              shift and go to state 4
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    TIMES           reduce using rule 41 (primary -> STRING .)
+    DIVIDE          reduce using rule 41 (primary -> STRING .)
+    MINUS           reduce using rule 41 (primary -> STRING .)
+    PLUS            reduce using rule 41 (primary -> STRING .)
+    LTE             reduce using rule 41 (primary -> STRING .)
+    GTE             reduce using rule 41 (primary -> STRING .)
+    LT              reduce using rule 41 (primary -> STRING .)
+    GT              reduce using rule 41 (primary -> STRING .)
+    EQUAL           reduce using rule 41 (primary -> STRING .)
+    NE              reduce using rule 41 (primary -> STRING .)
+    AND             reduce using rule 41 (primary -> STRING .)
+    OR              reduce using rule 41 (primary -> STRING .)
+    SEMICOLON       reduce using rule 41 (primary -> STRING .)
+    THEN            reduce using rule 41 (primary -> STRING .)
+    RPAREN          reduce using rule 41 (primary -> STRING .)
 
-    assignment                     shift and go to state 49
-    logical_or                     shift and go to state 11
-    logical_and                    shift and go to state 12
-    equality                       shift and go to state 13
-    relational                     shift and go to state 14
-    additive                       shift and go to state 15
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
 
 state 28
 
-    (6) statement -> expression SEMICOLON .
+    (4) sequence -> sequence declaration .
 
-    VARIABLE        reduce using rule 6 (statement -> expression SEMICOLON .)
-    DISPLAY         reduce using rule 6 (statement -> expression SEMICOLON .)
-    IF              reduce using rule 6 (statement -> expression SEMICOLON .)
-    ID              reduce using rule 6 (statement -> expression SEMICOLON .)
-    MINUS           reduce using rule 6 (statement -> expression SEMICOLON .)
-    NOT             reduce using rule 6 (statement -> expression SEMICOLON .)
-    NUMBER          reduce using rule 6 (statement -> expression SEMICOLON .)
-    BOOLEAN         reduce using rule 6 (statement -> expression SEMICOLON .)
-    LPAREN          reduce using rule 6 (statement -> expression SEMICOLON .)
-    STRING          reduce using rule 6 (statement -> expression SEMICOLON .)
-    $end            reduce using rule 6 (statement -> expression SEMICOLON .)
+    VARIABLE        reduce using rule 4 (sequence -> sequence declaration .)
+    DISPLAY         reduce using rule 4 (sequence -> sequence declaration .)
+    IF              reduce using rule 4 (sequence -> sequence declaration .)
+    LBRAC           reduce using rule 4 (sequence -> sequence declaration .)
+    ID              reduce using rule 4 (sequence -> sequence declaration .)
+    MINUS           reduce using rule 4 (sequence -> sequence declaration .)
+    NOT             reduce using rule 4 (sequence -> sequence declaration .)
+    NUMBER          reduce using rule 4 (sequence -> sequence declaration .)
+    BOOLEAN         reduce using rule 4 (sequence -> sequence declaration .)
+    LPAREN          reduce using rule 4 (sequence -> sequence declaration .)
+    STRING          reduce using rule 4 (sequence -> sequence declaration .)
+    $end            reduce using rule 4 (sequence -> sequence declaration .)
+    RBRAC           reduce using rule 4 (sequence -> sequence declaration .)
 
 
 state 29
 
-    (7) statement -> DISPLAY expression . SEMICOLON
+    (5) declaration -> VARIABLE ID . WORTH expression SEMICOLON
+    (6) declaration -> VARIABLE ID . SEMICOLON
 
-    SEMICOLON       shift and go to state 50
+    WORTH           shift and go to state 51
+    SEMICOLON       shift and go to state 52
 
 
 state 30
 
-    (9) if_statement -> IF expression . THEN statement
+    (15) assignment -> ID WORTH . assignment
+    (14) assignment -> . logical_or
+    (15) assignment -> . ID WORTH assignment
+    (16) logical_or -> . logical_or OR logical_and
+    (17) logical_or -> . logical_and
+    (18) logical_and -> . logical_and AND equality
+    (19) logical_and -> . equality
+    (20) equality -> . equality EQUAL relational
+    (21) equality -> . equality NE relational
+    (22) equality -> . relational
+    (23) relational -> . relational LTE additive
+    (24) relational -> . relational GTE additive
+    (25) relational -> . relational LT additive
+    (26) relational -> . relational GT additive
+    (27) relational -> . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    THEN            shift and go to state 51
+    ID              shift and go to state 5
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
+    assignment                     shift and go to state 53
+    logical_or                     shift and go to state 14
+    logical_and                    shift and go to state 15
+    equality                       shift and go to state 16
+    relational                     shift and go to state 17
+    additive                       shift and go to state 18
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 31
 
-    (13) logical_or -> logical_or OR . logical_and
-    (15) logical_and -> . logical_and AND equality
-    (16) logical_and -> . equality
-    (17) equality -> . equality EQUAL relational
-    (18) equality -> . equality NE relational
-    (19) equality -> . relational
-    (20) relational -> . relational LTE additive
-    (21) relational -> . relational GTE additive
-    (22) relational -> . relational LT additive
-    (23) relational -> . relational GT additive
-    (24) relational -> . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (8) statement -> expression SEMICOLON .
 
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    ID              shift and go to state 42
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    VARIABLE        reduce using rule 8 (statement -> expression SEMICOLON .)
+    DISPLAY         reduce using rule 8 (statement -> expression SEMICOLON .)
+    IF              reduce using rule 8 (statement -> expression SEMICOLON .)
+    LBRAC           reduce using rule 8 (statement -> expression SEMICOLON .)
+    ID              reduce using rule 8 (statement -> expression SEMICOLON .)
+    MINUS           reduce using rule 8 (statement -> expression SEMICOLON .)
+    NOT             reduce using rule 8 (statement -> expression SEMICOLON .)
+    NUMBER          reduce using rule 8 (statement -> expression SEMICOLON .)
+    BOOLEAN         reduce using rule 8 (statement -> expression SEMICOLON .)
+    LPAREN          reduce using rule 8 (statement -> expression SEMICOLON .)
+    STRING          reduce using rule 8 (statement -> expression SEMICOLON .)
+    $end            reduce using rule 8 (statement -> expression SEMICOLON .)
+    RBRAC           reduce using rule 8 (statement -> expression SEMICOLON .)
 
-    logical_and                    shift and go to state 52
-    equality                       shift and go to state 13
-    relational                     shift and go to state 14
-    additive                       shift and go to state 15
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
 
 state 32
 
-    (15) logical_and -> logical_and AND . equality
-    (17) equality -> . equality EQUAL relational
-    (18) equality -> . equality NE relational
-    (19) equality -> . relational
-    (20) relational -> . relational LTE additive
-    (21) relational -> . relational GTE additive
-    (22) relational -> . relational LT additive
-    (23) relational -> . relational GT additive
-    (24) relational -> . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (9) statement -> DISPLAY expression . SEMICOLON
 
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    ID              shift and go to state 42
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    SEMICOLON       shift and go to state 54
 
-    equality                       shift and go to state 53
-    relational                     shift and go to state 14
-    additive                       shift and go to state 15
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
 
 state 33
 
-    (17) equality -> equality EQUAL . relational
-    (20) relational -> . relational LTE additive
-    (21) relational -> . relational GTE additive
-    (22) relational -> . relational LT additive
-    (23) relational -> . relational GT additive
-    (24) relational -> . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (12) if_statement -> IF expression . THEN statement
 
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    ID              shift and go to state 42
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    THEN            shift and go to state 55
 
-    relational                     shift and go to state 54
-    additive                       shift and go to state 15
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
 
 state 34
 
-    (18) equality -> equality NE . relational
-    (20) relational -> . relational LTE additive
-    (21) relational -> . relational GTE additive
-    (22) relational -> . relational LT additive
-    (23) relational -> . relational GT additive
-    (24) relational -> . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (2) block -> LBRAC sequence . RBRAC
+    (4) sequence -> sequence . declaration
+    (5) declaration -> . VARIABLE ID WORTH expression SEMICOLON
+    (6) declaration -> . VARIABLE ID SEMICOLON
+    (7) declaration -> . statement
+    (8) statement -> . expression SEMICOLON
+    (9) statement -> . DISPLAY expression SEMICOLON
+    (10) statement -> . if_statement
+    (11) statement -> . block
+    (13) expression -> . assignment
+    (12) if_statement -> . IF expression THEN statement
+    (2) block -> . LBRAC sequence RBRAC
+    (14) assignment -> . logical_or
+    (15) assignment -> . ID WORTH assignment
+    (16) logical_or -> . logical_or OR logical_and
+    (17) logical_or -> . logical_and
+    (18) logical_and -> . logical_and AND equality
+    (19) logical_and -> . equality
+    (20) equality -> . equality EQUAL relational
+    (21) equality -> . equality NE relational
+    (22) equality -> . relational
+    (23) relational -> . relational LTE additive
+    (24) relational -> . relational GTE additive
+    (25) relational -> . relational LT additive
+    (26) relational -> . relational GT additive
+    (27) relational -> . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    ID              shift and go to state 42
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    RBRAC           shift and go to state 56
+    VARIABLE        shift and go to state 4
+    DISPLAY         shift and go to state 8
+    IF              shift and go to state 12
+    LBRAC           shift and go to state 13
+    ID              shift and go to state 5
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
-    relational                     shift and go to state 55
-    additive                       shift and go to state 15
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
+    declaration                    shift and go to state 28
+    expression                     shift and go to state 6
+    statement                      shift and go to state 7
+    if_statement                   shift and go to state 9
+    block                          shift and go to state 10
+    assignment                     shift and go to state 11
+    logical_or                     shift and go to state 14
+    logical_and                    shift and go to state 15
+    equality                       shift and go to state 16
+    relational                     shift and go to state 17
+    additive                       shift and go to state 18
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 35
 
-    (20) relational -> relational LTE . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (16) logical_or -> logical_or OR . logical_and
+    (18) logical_and -> . logical_and AND equality
+    (19) logical_and -> . equality
+    (20) equality -> . equality EQUAL relational
+    (21) equality -> . equality NE relational
+    (22) equality -> . relational
+    (23) relational -> . relational LTE additive
+    (24) relational -> . relational GTE additive
+    (25) relational -> . relational LT additive
+    (26) relational -> . relational GT additive
+    (27) relational -> . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    ID              shift and go to state 42
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    ID              shift and go to state 46
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
-    additive                       shift and go to state 56
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
+    logical_and                    shift and go to state 57
+    equality                       shift and go to state 16
+    relational                     shift and go to state 17
+    additive                       shift and go to state 18
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 36
 
-    (21) relational -> relational GTE . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (18) logical_and -> logical_and AND . equality
+    (20) equality -> . equality EQUAL relational
+    (21) equality -> . equality NE relational
+    (22) equality -> . relational
+    (23) relational -> . relational LTE additive
+    (24) relational -> . relational GTE additive
+    (25) relational -> . relational LT additive
+    (26) relational -> . relational GT additive
+    (27) relational -> . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    ID              shift and go to state 42
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    ID              shift and go to state 46
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
-    additive                       shift and go to state 57
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
+    equality                       shift and go to state 58
+    relational                     shift and go to state 17
+    additive                       shift and go to state 18
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 37
 
-    (22) relational -> relational LT . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (20) equality -> equality EQUAL . relational
+    (23) relational -> . relational LTE additive
+    (24) relational -> . relational GTE additive
+    (25) relational -> . relational LT additive
+    (26) relational -> . relational GT additive
+    (27) relational -> . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    ID              shift and go to state 42
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    ID              shift and go to state 46
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
-    additive                       shift and go to state 58
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
+    relational                     shift and go to state 59
+    additive                       shift and go to state 18
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 38
 
-    (23) relational -> relational GT . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (21) equality -> equality NE . relational
+    (23) relational -> . relational LTE additive
+    (24) relational -> . relational GTE additive
+    (25) relational -> . relational LT additive
+    (26) relational -> . relational GT additive
+    (27) relational -> . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    ID              shift and go to state 42
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    ID              shift and go to state 46
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
-    additive                       shift and go to state 59
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
+    relational                     shift and go to state 60
+    additive                       shift and go to state 18
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 39
 
-    (25) additive -> additive MINUS . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (23) relational -> relational LTE . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    ID              shift and go to state 42
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    ID              shift and go to state 46
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
-    multiplicative                 shift and go to state 60
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
+    additive                       shift and go to state 61
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 40
 
-    (26) additive -> additive PLUS . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (24) relational -> relational GTE . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    ID              shift and go to state 42
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    ID              shift and go to state 46
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
-    multiplicative                 shift and go to state 61
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
+    additive                       shift and go to state 62
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 41
 
-    (31) unary -> MINUS unary .
+    (25) relational -> relational LT . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    TIMES           reduce using rule 31 (unary -> MINUS unary .)
-    DIVIDE          reduce using rule 31 (unary -> MINUS unary .)
-    MINUS           reduce using rule 31 (unary -> MINUS unary .)
-    PLUS            reduce using rule 31 (unary -> MINUS unary .)
-    LTE             reduce using rule 31 (unary -> MINUS unary .)
-    GTE             reduce using rule 31 (unary -> MINUS unary .)
-    LT              reduce using rule 31 (unary -> MINUS unary .)
-    GT              reduce using rule 31 (unary -> MINUS unary .)
-    EQUAL           reduce using rule 31 (unary -> MINUS unary .)
-    NE              reduce using rule 31 (unary -> MINUS unary .)
-    AND             reduce using rule 31 (unary -> MINUS unary .)
-    OR              reduce using rule 31 (unary -> MINUS unary .)
-    SEMICOLON       reduce using rule 31 (unary -> MINUS unary .)
-    THEN            reduce using rule 31 (unary -> MINUS unary .)
-    RPAREN          reduce using rule 31 (unary -> MINUS unary .)
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    ID              shift and go to state 46
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
+    additive                       shift and go to state 63
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 42
 
-    (34) primary -> ID .
+    (26) relational -> relational GT . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    TIMES           reduce using rule 34 (primary -> ID .)
-    DIVIDE          reduce using rule 34 (primary -> ID .)
-    MINUS           reduce using rule 34 (primary -> ID .)
-    PLUS            reduce using rule 34 (primary -> ID .)
-    LTE             reduce using rule 34 (primary -> ID .)
-    GTE             reduce using rule 34 (primary -> ID .)
-    LT              reduce using rule 34 (primary -> ID .)
-    GT              reduce using rule 34 (primary -> ID .)
-    EQUAL           reduce using rule 34 (primary -> ID .)
-    NE              reduce using rule 34 (primary -> ID .)
-    AND             reduce using rule 34 (primary -> ID .)
-    OR              reduce using rule 34 (primary -> ID .)
-    SEMICOLON       reduce using rule 34 (primary -> ID .)
-    THEN            reduce using rule 34 (primary -> ID .)
-    RPAREN          reduce using rule 34 (primary -> ID .)
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    ID              shift and go to state 46
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
+    additive                       shift and go to state 64
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 43
 
-    (28) multiplicative -> multiplicative TIMES . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (28) additive -> additive MINUS . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    ID              shift and go to state 42
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    ID              shift and go to state 46
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
-    unary                          shift and go to state 62
-    primary                        shift and go to state 20
+    multiplicative                 shift and go to state 65
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 44
 
-    (29) multiplicative -> multiplicative DIVIDE . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (29) additive -> additive PLUS . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    ID              shift and go to state 42
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    ID              shift and go to state 46
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
-    unary                          shift and go to state 63
-    primary                        shift and go to state 20
+    multiplicative                 shift and go to state 66
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 45
 
-    (32) unary -> NOT unary .
+    (34) unary -> MINUS unary .
 
-    TIMES           reduce using rule 32 (unary -> NOT unary .)
-    DIVIDE          reduce using rule 32 (unary -> NOT unary .)
-    MINUS           reduce using rule 32 (unary -> NOT unary .)
-    PLUS            reduce using rule 32 (unary -> NOT unary .)
-    LTE             reduce using rule 32 (unary -> NOT unary .)
-    GTE             reduce using rule 32 (unary -> NOT unary .)
-    LT              reduce using rule 32 (unary -> NOT unary .)
-    GT              reduce using rule 32 (unary -> NOT unary .)
-    EQUAL           reduce using rule 32 (unary -> NOT unary .)
-    NE              reduce using rule 32 (unary -> NOT unary .)
-    AND             reduce using rule 32 (unary -> NOT unary .)
-    OR              reduce using rule 32 (unary -> NOT unary .)
-    SEMICOLON       reduce using rule 32 (unary -> NOT unary .)
-    THEN            reduce using rule 32 (unary -> NOT unary .)
-    RPAREN          reduce using rule 32 (unary -> NOT unary .)
+    TIMES           reduce using rule 34 (unary -> MINUS unary .)
+    DIVIDE          reduce using rule 34 (unary -> MINUS unary .)
+    MINUS           reduce using rule 34 (unary -> MINUS unary .)
+    PLUS            reduce using rule 34 (unary -> MINUS unary .)
+    LTE             reduce using rule 34 (unary -> MINUS unary .)
+    GTE             reduce using rule 34 (unary -> MINUS unary .)
+    LT              reduce using rule 34 (unary -> MINUS unary .)
+    GT              reduce using rule 34 (unary -> MINUS unary .)
+    EQUAL           reduce using rule 34 (unary -> MINUS unary .)
+    NE              reduce using rule 34 (unary -> MINUS unary .)
+    AND             reduce using rule 34 (unary -> MINUS unary .)
+    OR              reduce using rule 34 (unary -> MINUS unary .)
+    SEMICOLON       reduce using rule 34 (unary -> MINUS unary .)
+    THEN            reduce using rule 34 (unary -> MINUS unary .)
+    RPAREN          reduce using rule 34 (unary -> MINUS unary .)
 
 
 state 46
 
-    (37) primary -> LPAREN expression . RPAREN
+    (37) primary -> ID .
 
-    RPAREN          shift and go to state 64
+    TIMES           reduce using rule 37 (primary -> ID .)
+    DIVIDE          reduce using rule 37 (primary -> ID .)
+    MINUS           reduce using rule 37 (primary -> ID .)
+    PLUS            reduce using rule 37 (primary -> ID .)
+    LTE             reduce using rule 37 (primary -> ID .)
+    GTE             reduce using rule 37 (primary -> ID .)
+    LT              reduce using rule 37 (primary -> ID .)
+    GT              reduce using rule 37 (primary -> ID .)
+    EQUAL           reduce using rule 37 (primary -> ID .)
+    NE              reduce using rule 37 (primary -> ID .)
+    AND             reduce using rule 37 (primary -> ID .)
+    OR              reduce using rule 37 (primary -> ID .)
+    SEMICOLON       reduce using rule 37 (primary -> ID .)
+    THEN            reduce using rule 37 (primary -> ID .)
+    RPAREN          reduce using rule 37 (primary -> ID .)
 
 
 state 47
 
-    (3) declaration -> VARIABLE ID WORTH . expression SEMICOLON
-    (10) expression -> . assignment
-    (11) assignment -> . logical_or
-    (12) assignment -> . ID WORTH assignment
-    (13) logical_or -> . logical_or OR logical_and
-    (14) logical_or -> . logical_and
-    (15) logical_and -> . logical_and AND equality
-    (16) logical_and -> . equality
-    (17) equality -> . equality EQUAL relational
-    (18) equality -> . equality NE relational
-    (19) equality -> . relational
-    (20) relational -> . relational LTE additive
-    (21) relational -> . relational GTE additive
-    (22) relational -> . relational LT additive
-    (23) relational -> . relational GT additive
-    (24) relational -> . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (31) multiplicative -> multiplicative TIMES . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    ID              shift and go to state 4
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    ID              shift and go to state 46
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
-    expression                     shift and go to state 65
-    assignment                     shift and go to state 9
-    logical_or                     shift and go to state 11
-    logical_and                    shift and go to state 12
-    equality                       shift and go to state 13
-    relational                     shift and go to state 14
-    additive                       shift and go to state 15
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
+    unary                          shift and go to state 67
+    primary                        shift and go to state 23
 
 state 48
 
-    (4) declaration -> VARIABLE ID SEMICOLON .
+    (32) multiplicative -> multiplicative DIVIDE . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    VARIABLE        reduce using rule 4 (declaration -> VARIABLE ID SEMICOLON .)
-    DISPLAY         reduce using rule 4 (declaration -> VARIABLE ID SEMICOLON .)
-    IF              reduce using rule 4 (declaration -> VARIABLE ID SEMICOLON .)
-    ID              reduce using rule 4 (declaration -> VARIABLE ID SEMICOLON .)
-    MINUS           reduce using rule 4 (declaration -> VARIABLE ID SEMICOLON .)
-    NOT             reduce using rule 4 (declaration -> VARIABLE ID SEMICOLON .)
-    NUMBER          reduce using rule 4 (declaration -> VARIABLE ID SEMICOLON .)
-    BOOLEAN         reduce using rule 4 (declaration -> VARIABLE ID SEMICOLON .)
-    LPAREN          reduce using rule 4 (declaration -> VARIABLE ID SEMICOLON .)
-    STRING          reduce using rule 4 (declaration -> VARIABLE ID SEMICOLON .)
-    $end            reduce using rule 4 (declaration -> VARIABLE ID SEMICOLON .)
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    ID              shift and go to state 46
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
+    unary                          shift and go to state 68
+    primary                        shift and go to state 23
 
 state 49
 
-    (12) assignment -> ID WORTH assignment .
+    (35) unary -> NOT unary .
 
-    SEMICOLON       reduce using rule 12 (assignment -> ID WORTH assignment .)
-    THEN            reduce using rule 12 (assignment -> ID WORTH assignment .)
-    RPAREN          reduce using rule 12 (assignment -> ID WORTH assignment .)
+    TIMES           reduce using rule 35 (unary -> NOT unary .)
+    DIVIDE          reduce using rule 35 (unary -> NOT unary .)
+    MINUS           reduce using rule 35 (unary -> NOT unary .)
+    PLUS            reduce using rule 35 (unary -> NOT unary .)
+    LTE             reduce using rule 35 (unary -> NOT unary .)
+    GTE             reduce using rule 35 (unary -> NOT unary .)
+    LT              reduce using rule 35 (unary -> NOT unary .)
+    GT              reduce using rule 35 (unary -> NOT unary .)
+    EQUAL           reduce using rule 35 (unary -> NOT unary .)
+    NE              reduce using rule 35 (unary -> NOT unary .)
+    AND             reduce using rule 35 (unary -> NOT unary .)
+    OR              reduce using rule 35 (unary -> NOT unary .)
+    SEMICOLON       reduce using rule 35 (unary -> NOT unary .)
+    THEN            reduce using rule 35 (unary -> NOT unary .)
+    RPAREN          reduce using rule 35 (unary -> NOT unary .)
 
 
 state 50
 
-    (7) statement -> DISPLAY expression SEMICOLON .
+    (40) primary -> LPAREN expression . RPAREN
 
-    VARIABLE        reduce using rule 7 (statement -> DISPLAY expression SEMICOLON .)
-    DISPLAY         reduce using rule 7 (statement -> DISPLAY expression SEMICOLON .)
-    IF              reduce using rule 7 (statement -> DISPLAY expression SEMICOLON .)
-    ID              reduce using rule 7 (statement -> DISPLAY expression SEMICOLON .)
-    MINUS           reduce using rule 7 (statement -> DISPLAY expression SEMICOLON .)
-    NOT             reduce using rule 7 (statement -> DISPLAY expression SEMICOLON .)
-    NUMBER          reduce using rule 7 (statement -> DISPLAY expression SEMICOLON .)
-    BOOLEAN         reduce using rule 7 (statement -> DISPLAY expression SEMICOLON .)
-    LPAREN          reduce using rule 7 (statement -> DISPLAY expression SEMICOLON .)
-    STRING          reduce using rule 7 (statement -> DISPLAY expression SEMICOLON .)
-    $end            reduce using rule 7 (statement -> DISPLAY expression SEMICOLON .)
+    RPAREN          shift and go to state 69
 
 
 state 51
 
-    (9) if_statement -> IF expression THEN . statement
-    (6) statement -> . expression SEMICOLON
-    (7) statement -> . DISPLAY expression SEMICOLON
-    (8) statement -> . if_statement
-    (10) expression -> . assignment
-    (9) if_statement -> . IF expression THEN statement
-    (11) assignment -> . logical_or
-    (12) assignment -> . ID WORTH assignment
-    (13) logical_or -> . logical_or OR logical_and
-    (14) logical_or -> . logical_and
-    (15) logical_and -> . logical_and AND equality
-    (16) logical_and -> . equality
-    (17) equality -> . equality EQUAL relational
-    (18) equality -> . equality NE relational
-    (19) equality -> . relational
-    (20) relational -> . relational LTE additive
-    (21) relational -> . relational GTE additive
-    (22) relational -> . relational LT additive
-    (23) relational -> . relational GT additive
-    (24) relational -> . additive
-    (25) additive -> . additive MINUS multiplicative
-    (26) additive -> . additive PLUS multiplicative
-    (27) additive -> . multiplicative
-    (28) multiplicative -> . multiplicative TIMES unary
-    (29) multiplicative -> . multiplicative DIVIDE unary
-    (30) multiplicative -> . unary
-    (31) unary -> . MINUS unary
-    (32) unary -> . NOT unary
-    (33) unary -> . primary
-    (34) primary -> . ID
-    (35) primary -> . NUMBER
-    (36) primary -> . BOOLEAN
-    (37) primary -> . LPAREN expression RPAREN
-    (38) primary -> . STRING
+    (5) declaration -> VARIABLE ID WORTH . expression SEMICOLON
+    (13) expression -> . assignment
+    (14) assignment -> . logical_or
+    (15) assignment -> . ID WORTH assignment
+    (16) logical_or -> . logical_or OR logical_and
+    (17) logical_or -> . logical_and
+    (18) logical_and -> . logical_and AND equality
+    (19) logical_and -> . equality
+    (20) equality -> . equality EQUAL relational
+    (21) equality -> . equality NE relational
+    (22) equality -> . relational
+    (23) relational -> . relational LTE additive
+    (24) relational -> . relational GTE additive
+    (25) relational -> . relational LT additive
+    (26) relational -> . relational GT additive
+    (27) relational -> . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    DISPLAY         shift and go to state 7
-    IF              shift and go to state 10
-    ID              shift and go to state 4
-    MINUS           shift and go to state 16
-    NOT             shift and go to state 19
-    NUMBER          shift and go to state 21
-    BOOLEAN         shift and go to state 22
-    LPAREN          shift and go to state 23
-    STRING          shift and go to state 24
+    ID              shift and go to state 5
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
-    expression                     shift and go to state 5
-    statement                      shift and go to state 66
-    if_statement                   shift and go to state 8
-    assignment                     shift and go to state 9
-    logical_or                     shift and go to state 11
-    logical_and                    shift and go to state 12
-    equality                       shift and go to state 13
-    relational                     shift and go to state 14
-    additive                       shift and go to state 15
-    multiplicative                 shift and go to state 17
-    unary                          shift and go to state 18
-    primary                        shift and go to state 20
+    expression                     shift and go to state 70
+    assignment                     shift and go to state 11
+    logical_or                     shift and go to state 14
+    logical_and                    shift and go to state 15
+    equality                       shift and go to state 16
+    relational                     shift and go to state 17
+    additive                       shift and go to state 18
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 52
 
-    (13) logical_or -> logical_or OR logical_and .
-    (15) logical_and -> logical_and . AND equality
+    (6) declaration -> VARIABLE ID SEMICOLON .
 
-    OR              reduce using rule 13 (logical_or -> logical_or OR logical_and .)
-    SEMICOLON       reduce using rule 13 (logical_or -> logical_or OR logical_and .)
-    THEN            reduce using rule 13 (logical_or -> logical_or OR logical_and .)
-    RPAREN          reduce using rule 13 (logical_or -> logical_or OR logical_and .)
-    AND             shift and go to state 32
+    VARIABLE        reduce using rule 6 (declaration -> VARIABLE ID SEMICOLON .)
+    DISPLAY         reduce using rule 6 (declaration -> VARIABLE ID SEMICOLON .)
+    IF              reduce using rule 6 (declaration -> VARIABLE ID SEMICOLON .)
+    LBRAC           reduce using rule 6 (declaration -> VARIABLE ID SEMICOLON .)
+    ID              reduce using rule 6 (declaration -> VARIABLE ID SEMICOLON .)
+    MINUS           reduce using rule 6 (declaration -> VARIABLE ID SEMICOLON .)
+    NOT             reduce using rule 6 (declaration -> VARIABLE ID SEMICOLON .)
+    NUMBER          reduce using rule 6 (declaration -> VARIABLE ID SEMICOLON .)
+    BOOLEAN         reduce using rule 6 (declaration -> VARIABLE ID SEMICOLON .)
+    LPAREN          reduce using rule 6 (declaration -> VARIABLE ID SEMICOLON .)
+    STRING          reduce using rule 6 (declaration -> VARIABLE ID SEMICOLON .)
+    $end            reduce using rule 6 (declaration -> VARIABLE ID SEMICOLON .)
+    RBRAC           reduce using rule 6 (declaration -> VARIABLE ID SEMICOLON .)
 
 
 state 53
 
-    (15) logical_and -> logical_and AND equality .
-    (17) equality -> equality . EQUAL relational
-    (18) equality -> equality . NE relational
+    (15) assignment -> ID WORTH assignment .
 
-    AND             reduce using rule 15 (logical_and -> logical_and AND equality .)
-    OR              reduce using rule 15 (logical_and -> logical_and AND equality .)
-    SEMICOLON       reduce using rule 15 (logical_and -> logical_and AND equality .)
-    THEN            reduce using rule 15 (logical_and -> logical_and AND equality .)
-    RPAREN          reduce using rule 15 (logical_and -> logical_and AND equality .)
-    EQUAL           shift and go to state 33
-    NE              shift and go to state 34
+    SEMICOLON       reduce using rule 15 (assignment -> ID WORTH assignment .)
+    THEN            reduce using rule 15 (assignment -> ID WORTH assignment .)
+    RPAREN          reduce using rule 15 (assignment -> ID WORTH assignment .)
 
 
 state 54
 
-    (17) equality -> equality EQUAL relational .
-    (20) relational -> relational . LTE additive
-    (21) relational -> relational . GTE additive
-    (22) relational -> relational . LT additive
-    (23) relational -> relational . GT additive
+    (9) statement -> DISPLAY expression SEMICOLON .
 
-    EQUAL           reduce using rule 17 (equality -> equality EQUAL relational .)
-    NE              reduce using rule 17 (equality -> equality EQUAL relational .)
-    AND             reduce using rule 17 (equality -> equality EQUAL relational .)
-    OR              reduce using rule 17 (equality -> equality EQUAL relational .)
-    SEMICOLON       reduce using rule 17 (equality -> equality EQUAL relational .)
-    THEN            reduce using rule 17 (equality -> equality EQUAL relational .)
-    RPAREN          reduce using rule 17 (equality -> equality EQUAL relational .)
-    LTE             shift and go to state 35
-    GTE             shift and go to state 36
-    LT              shift and go to state 37
-    GT              shift and go to state 38
+    VARIABLE        reduce using rule 9 (statement -> DISPLAY expression SEMICOLON .)
+    DISPLAY         reduce using rule 9 (statement -> DISPLAY expression SEMICOLON .)
+    IF              reduce using rule 9 (statement -> DISPLAY expression SEMICOLON .)
+    LBRAC           reduce using rule 9 (statement -> DISPLAY expression SEMICOLON .)
+    ID              reduce using rule 9 (statement -> DISPLAY expression SEMICOLON .)
+    MINUS           reduce using rule 9 (statement -> DISPLAY expression SEMICOLON .)
+    NOT             reduce using rule 9 (statement -> DISPLAY expression SEMICOLON .)
+    NUMBER          reduce using rule 9 (statement -> DISPLAY expression SEMICOLON .)
+    BOOLEAN         reduce using rule 9 (statement -> DISPLAY expression SEMICOLON .)
+    LPAREN          reduce using rule 9 (statement -> DISPLAY expression SEMICOLON .)
+    STRING          reduce using rule 9 (statement -> DISPLAY expression SEMICOLON .)
+    $end            reduce using rule 9 (statement -> DISPLAY expression SEMICOLON .)
+    RBRAC           reduce using rule 9 (statement -> DISPLAY expression SEMICOLON .)
 
 
 state 55
 
-    (18) equality -> equality NE relational .
-    (20) relational -> relational . LTE additive
-    (21) relational -> relational . GTE additive
-    (22) relational -> relational . LT additive
-    (23) relational -> relational . GT additive
+    (12) if_statement -> IF expression THEN . statement
+    (8) statement -> . expression SEMICOLON
+    (9) statement -> . DISPLAY expression SEMICOLON
+    (10) statement -> . if_statement
+    (11) statement -> . block
+    (13) expression -> . assignment
+    (12) if_statement -> . IF expression THEN statement
+    (2) block -> . LBRAC sequence RBRAC
+    (14) assignment -> . logical_or
+    (15) assignment -> . ID WORTH assignment
+    (16) logical_or -> . logical_or OR logical_and
+    (17) logical_or -> . logical_and
+    (18) logical_and -> . logical_and AND equality
+    (19) logical_and -> . equality
+    (20) equality -> . equality EQUAL relational
+    (21) equality -> . equality NE relational
+    (22) equality -> . relational
+    (23) relational -> . relational LTE additive
+    (24) relational -> . relational GTE additive
+    (25) relational -> . relational LT additive
+    (26) relational -> . relational GT additive
+    (27) relational -> . additive
+    (28) additive -> . additive MINUS multiplicative
+    (29) additive -> . additive PLUS multiplicative
+    (30) additive -> . multiplicative
+    (31) multiplicative -> . multiplicative TIMES unary
+    (32) multiplicative -> . multiplicative DIVIDE unary
+    (33) multiplicative -> . unary
+    (34) unary -> . MINUS unary
+    (35) unary -> . NOT unary
+    (36) unary -> . primary
+    (37) primary -> . ID
+    (38) primary -> . NUMBER
+    (39) primary -> . BOOLEAN
+    (40) primary -> . LPAREN expression RPAREN
+    (41) primary -> . STRING
 
-    EQUAL           reduce using rule 18 (equality -> equality NE relational .)
-    NE              reduce using rule 18 (equality -> equality NE relational .)
-    AND             reduce using rule 18 (equality -> equality NE relational .)
-    OR              reduce using rule 18 (equality -> equality NE relational .)
-    SEMICOLON       reduce using rule 18 (equality -> equality NE relational .)
-    THEN            reduce using rule 18 (equality -> equality NE relational .)
-    RPAREN          reduce using rule 18 (equality -> equality NE relational .)
-    LTE             shift and go to state 35
-    GTE             shift and go to state 36
-    LT              shift and go to state 37
-    GT              shift and go to state 38
+    DISPLAY         shift and go to state 8
+    IF              shift and go to state 12
+    LBRAC           shift and go to state 13
+    ID              shift and go to state 5
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 22
+    NUMBER          shift and go to state 24
+    BOOLEAN         shift and go to state 25
+    LPAREN          shift and go to state 26
+    STRING          shift and go to state 27
 
+    expression                     shift and go to state 6
+    statement                      shift and go to state 71
+    if_statement                   shift and go to state 9
+    block                          shift and go to state 10
+    assignment                     shift and go to state 11
+    logical_or                     shift and go to state 14
+    logical_and                    shift and go to state 15
+    equality                       shift and go to state 16
+    relational                     shift and go to state 17
+    additive                       shift and go to state 18
+    multiplicative                 shift and go to state 20
+    unary                          shift and go to state 21
+    primary                        shift and go to state 23
 
 state 56
 
-    (20) relational -> relational LTE additive .
-    (25) additive -> additive . MINUS multiplicative
-    (26) additive -> additive . PLUS multiplicative
+    (2) block -> LBRAC sequence RBRAC .
 
-    LTE             reduce using rule 20 (relational -> relational LTE additive .)
-    GTE             reduce using rule 20 (relational -> relational LTE additive .)
-    LT              reduce using rule 20 (relational -> relational LTE additive .)
-    GT              reduce using rule 20 (relational -> relational LTE additive .)
-    EQUAL           reduce using rule 20 (relational -> relational LTE additive .)
-    NE              reduce using rule 20 (relational -> relational LTE additive .)
-    AND             reduce using rule 20 (relational -> relational LTE additive .)
-    OR              reduce using rule 20 (relational -> relational LTE additive .)
-    SEMICOLON       reduce using rule 20 (relational -> relational LTE additive .)
-    THEN            reduce using rule 20 (relational -> relational LTE additive .)
-    RPAREN          reduce using rule 20 (relational -> relational LTE additive .)
-    MINUS           shift and go to state 39
-    PLUS            shift and go to state 40
+    VARIABLE        reduce using rule 2 (block -> LBRAC sequence RBRAC .)
+    DISPLAY         reduce using rule 2 (block -> LBRAC sequence RBRAC .)
+    IF              reduce using rule 2 (block -> LBRAC sequence RBRAC .)
+    LBRAC           reduce using rule 2 (block -> LBRAC sequence RBRAC .)
+    ID              reduce using rule 2 (block -> LBRAC sequence RBRAC .)
+    MINUS           reduce using rule 2 (block -> LBRAC sequence RBRAC .)
+    NOT             reduce using rule 2 (block -> LBRAC sequence RBRAC .)
+    NUMBER          reduce using rule 2 (block -> LBRAC sequence RBRAC .)
+    BOOLEAN         reduce using rule 2 (block -> LBRAC sequence RBRAC .)
+    LPAREN          reduce using rule 2 (block -> LBRAC sequence RBRAC .)
+    STRING          reduce using rule 2 (block -> LBRAC sequence RBRAC .)
+    $end            reduce using rule 2 (block -> LBRAC sequence RBRAC .)
+    RBRAC           reduce using rule 2 (block -> LBRAC sequence RBRAC .)
 
 
 state 57
 
-    (21) relational -> relational GTE additive .
-    (25) additive -> additive . MINUS multiplicative
-    (26) additive -> additive . PLUS multiplicative
+    (16) logical_or -> logical_or OR logical_and .
+    (18) logical_and -> logical_and . AND equality
 
-    LTE             reduce using rule 21 (relational -> relational GTE additive .)
-    GTE             reduce using rule 21 (relational -> relational GTE additive .)
-    LT              reduce using rule 21 (relational -> relational GTE additive .)
-    GT              reduce using rule 21 (relational -> relational GTE additive .)
-    EQUAL           reduce using rule 21 (relational -> relational GTE additive .)
-    NE              reduce using rule 21 (relational -> relational GTE additive .)
-    AND             reduce using rule 21 (relational -> relational GTE additive .)
-    OR              reduce using rule 21 (relational -> relational GTE additive .)
-    SEMICOLON       reduce using rule 21 (relational -> relational GTE additive .)
-    THEN            reduce using rule 21 (relational -> relational GTE additive .)
-    RPAREN          reduce using rule 21 (relational -> relational GTE additive .)
-    MINUS           shift and go to state 39
-    PLUS            shift and go to state 40
+    OR              reduce using rule 16 (logical_or -> logical_or OR logical_and .)
+    SEMICOLON       reduce using rule 16 (logical_or -> logical_or OR logical_and .)
+    THEN            reduce using rule 16 (logical_or -> logical_or OR logical_and .)
+    RPAREN          reduce using rule 16 (logical_or -> logical_or OR logical_and .)
+    AND             shift and go to state 36
 
 
 state 58
 
-    (22) relational -> relational LT additive .
-    (25) additive -> additive . MINUS multiplicative
-    (26) additive -> additive . PLUS multiplicative
+    (18) logical_and -> logical_and AND equality .
+    (20) equality -> equality . EQUAL relational
+    (21) equality -> equality . NE relational
 
-    LTE             reduce using rule 22 (relational -> relational LT additive .)
-    GTE             reduce using rule 22 (relational -> relational LT additive .)
-    LT              reduce using rule 22 (relational -> relational LT additive .)
-    GT              reduce using rule 22 (relational -> relational LT additive .)
-    EQUAL           reduce using rule 22 (relational -> relational LT additive .)
-    NE              reduce using rule 22 (relational -> relational LT additive .)
-    AND             reduce using rule 22 (relational -> relational LT additive .)
-    OR              reduce using rule 22 (relational -> relational LT additive .)
-    SEMICOLON       reduce using rule 22 (relational -> relational LT additive .)
-    THEN            reduce using rule 22 (relational -> relational LT additive .)
-    RPAREN          reduce using rule 22 (relational -> relational LT additive .)
-    MINUS           shift and go to state 39
-    PLUS            shift and go to state 40
+    AND             reduce using rule 18 (logical_and -> logical_and AND equality .)
+    OR              reduce using rule 18 (logical_and -> logical_and AND equality .)
+    SEMICOLON       reduce using rule 18 (logical_and -> logical_and AND equality .)
+    THEN            reduce using rule 18 (logical_and -> logical_and AND equality .)
+    RPAREN          reduce using rule 18 (logical_and -> logical_and AND equality .)
+    EQUAL           shift and go to state 37
+    NE              shift and go to state 38
 
 
 state 59
 
-    (23) relational -> relational GT additive .
-    (25) additive -> additive . MINUS multiplicative
-    (26) additive -> additive . PLUS multiplicative
+    (20) equality -> equality EQUAL relational .
+    (23) relational -> relational . LTE additive
+    (24) relational -> relational . GTE additive
+    (25) relational -> relational . LT additive
+    (26) relational -> relational . GT additive
 
-    LTE             reduce using rule 23 (relational -> relational GT additive .)
-    GTE             reduce using rule 23 (relational -> relational GT additive .)
-    LT              reduce using rule 23 (relational -> relational GT additive .)
-    GT              reduce using rule 23 (relational -> relational GT additive .)
-    EQUAL           reduce using rule 23 (relational -> relational GT additive .)
-    NE              reduce using rule 23 (relational -> relational GT additive .)
-    AND             reduce using rule 23 (relational -> relational GT additive .)
-    OR              reduce using rule 23 (relational -> relational GT additive .)
-    SEMICOLON       reduce using rule 23 (relational -> relational GT additive .)
-    THEN            reduce using rule 23 (relational -> relational GT additive .)
-    RPAREN          reduce using rule 23 (relational -> relational GT additive .)
-    MINUS           shift and go to state 39
-    PLUS            shift and go to state 40
+    EQUAL           reduce using rule 20 (equality -> equality EQUAL relational .)
+    NE              reduce using rule 20 (equality -> equality EQUAL relational .)
+    AND             reduce using rule 20 (equality -> equality EQUAL relational .)
+    OR              reduce using rule 20 (equality -> equality EQUAL relational .)
+    SEMICOLON       reduce using rule 20 (equality -> equality EQUAL relational .)
+    THEN            reduce using rule 20 (equality -> equality EQUAL relational .)
+    RPAREN          reduce using rule 20 (equality -> equality EQUAL relational .)
+    LTE             shift and go to state 39
+    GTE             shift and go to state 40
+    LT              shift and go to state 41
+    GT              shift and go to state 42
 
 
 state 60
 
-    (25) additive -> additive MINUS multiplicative .
-    (28) multiplicative -> multiplicative . TIMES unary
-    (29) multiplicative -> multiplicative . DIVIDE unary
+    (21) equality -> equality NE relational .
+    (23) relational -> relational . LTE additive
+    (24) relational -> relational . GTE additive
+    (25) relational -> relational . LT additive
+    (26) relational -> relational . GT additive
 
-    MINUS           reduce using rule 25 (additive -> additive MINUS multiplicative .)
-    PLUS            reduce using rule 25 (additive -> additive MINUS multiplicative .)
-    LTE             reduce using rule 25 (additive -> additive MINUS multiplicative .)
-    GTE             reduce using rule 25 (additive -> additive MINUS multiplicative .)
-    LT              reduce using rule 25 (additive -> additive MINUS multiplicative .)
-    GT              reduce using rule 25 (additive -> additive MINUS multiplicative .)
-    EQUAL           reduce using rule 25 (additive -> additive MINUS multiplicative .)
-    NE              reduce using rule 25 (additive -> additive MINUS multiplicative .)
-    AND             reduce using rule 25 (additive -> additive MINUS multiplicative .)
-    OR              reduce using rule 25 (additive -> additive MINUS multiplicative .)
-    SEMICOLON       reduce using rule 25 (additive -> additive MINUS multiplicative .)
-    THEN            reduce using rule 25 (additive -> additive MINUS multiplicative .)
-    RPAREN          reduce using rule 25 (additive -> additive MINUS multiplicative .)
-    TIMES           shift and go to state 43
-    DIVIDE          shift and go to state 44
+    EQUAL           reduce using rule 21 (equality -> equality NE relational .)
+    NE              reduce using rule 21 (equality -> equality NE relational .)
+    AND             reduce using rule 21 (equality -> equality NE relational .)
+    OR              reduce using rule 21 (equality -> equality NE relational .)
+    SEMICOLON       reduce using rule 21 (equality -> equality NE relational .)
+    THEN            reduce using rule 21 (equality -> equality NE relational .)
+    RPAREN          reduce using rule 21 (equality -> equality NE relational .)
+    LTE             shift and go to state 39
+    GTE             shift and go to state 40
+    LT              shift and go to state 41
+    GT              shift and go to state 42
 
 
 state 61
 
-    (26) additive -> additive PLUS multiplicative .
-    (28) multiplicative -> multiplicative . TIMES unary
-    (29) multiplicative -> multiplicative . DIVIDE unary
+    (23) relational -> relational LTE additive .
+    (28) additive -> additive . MINUS multiplicative
+    (29) additive -> additive . PLUS multiplicative
 
-    MINUS           reduce using rule 26 (additive -> additive PLUS multiplicative .)
-    PLUS            reduce using rule 26 (additive -> additive PLUS multiplicative .)
-    LTE             reduce using rule 26 (additive -> additive PLUS multiplicative .)
-    GTE             reduce using rule 26 (additive -> additive PLUS multiplicative .)
-    LT              reduce using rule 26 (additive -> additive PLUS multiplicative .)
-    GT              reduce using rule 26 (additive -> additive PLUS multiplicative .)
-    EQUAL           reduce using rule 26 (additive -> additive PLUS multiplicative .)
-    NE              reduce using rule 26 (additive -> additive PLUS multiplicative .)
-    AND             reduce using rule 26 (additive -> additive PLUS multiplicative .)
-    OR              reduce using rule 26 (additive -> additive PLUS multiplicative .)
-    SEMICOLON       reduce using rule 26 (additive -> additive PLUS multiplicative .)
-    THEN            reduce using rule 26 (additive -> additive PLUS multiplicative .)
-    RPAREN          reduce using rule 26 (additive -> additive PLUS multiplicative .)
-    TIMES           shift and go to state 43
-    DIVIDE          shift and go to state 44
+    LTE             reduce using rule 23 (relational -> relational LTE additive .)
+    GTE             reduce using rule 23 (relational -> relational LTE additive .)
+    LT              reduce using rule 23 (relational -> relational LTE additive .)
+    GT              reduce using rule 23 (relational -> relational LTE additive .)
+    EQUAL           reduce using rule 23 (relational -> relational LTE additive .)
+    NE              reduce using rule 23 (relational -> relational LTE additive .)
+    AND             reduce using rule 23 (relational -> relational LTE additive .)
+    OR              reduce using rule 23 (relational -> relational LTE additive .)
+    SEMICOLON       reduce using rule 23 (relational -> relational LTE additive .)
+    THEN            reduce using rule 23 (relational -> relational LTE additive .)
+    RPAREN          reduce using rule 23 (relational -> relational LTE additive .)
+    MINUS           shift and go to state 43
+    PLUS            shift and go to state 44
 
 
 state 62
 
-    (28) multiplicative -> multiplicative TIMES unary .
+    (24) relational -> relational GTE additive .
+    (28) additive -> additive . MINUS multiplicative
+    (29) additive -> additive . PLUS multiplicative
 
-    TIMES           reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
-    DIVIDE          reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
-    MINUS           reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
-    PLUS            reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
-    LTE             reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
-    GTE             reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
-    LT              reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
-    GT              reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
-    EQUAL           reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
-    NE              reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
-    AND             reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
-    OR              reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
-    SEMICOLON       reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
-    THEN            reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
-    RPAREN          reduce using rule 28 (multiplicative -> multiplicative TIMES unary .)
+    LTE             reduce using rule 24 (relational -> relational GTE additive .)
+    GTE             reduce using rule 24 (relational -> relational GTE additive .)
+    LT              reduce using rule 24 (relational -> relational GTE additive .)
+    GT              reduce using rule 24 (relational -> relational GTE additive .)
+    EQUAL           reduce using rule 24 (relational -> relational GTE additive .)
+    NE              reduce using rule 24 (relational -> relational GTE additive .)
+    AND             reduce using rule 24 (relational -> relational GTE additive .)
+    OR              reduce using rule 24 (relational -> relational GTE additive .)
+    SEMICOLON       reduce using rule 24 (relational -> relational GTE additive .)
+    THEN            reduce using rule 24 (relational -> relational GTE additive .)
+    RPAREN          reduce using rule 24 (relational -> relational GTE additive .)
+    MINUS           shift and go to state 43
+    PLUS            shift and go to state 44
 
 
 state 63
 
-    (29) multiplicative -> multiplicative DIVIDE unary .
+    (25) relational -> relational LT additive .
+    (28) additive -> additive . MINUS multiplicative
+    (29) additive -> additive . PLUS multiplicative
 
-    TIMES           reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
-    DIVIDE          reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
-    MINUS           reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
-    PLUS            reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
-    LTE             reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
-    GTE             reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
-    LT              reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
-    GT              reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
-    EQUAL           reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
-    NE              reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
-    AND             reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
-    OR              reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
-    SEMICOLON       reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
-    THEN            reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
-    RPAREN          reduce using rule 29 (multiplicative -> multiplicative DIVIDE unary .)
+    LTE             reduce using rule 25 (relational -> relational LT additive .)
+    GTE             reduce using rule 25 (relational -> relational LT additive .)
+    LT              reduce using rule 25 (relational -> relational LT additive .)
+    GT              reduce using rule 25 (relational -> relational LT additive .)
+    EQUAL           reduce using rule 25 (relational -> relational LT additive .)
+    NE              reduce using rule 25 (relational -> relational LT additive .)
+    AND             reduce using rule 25 (relational -> relational LT additive .)
+    OR              reduce using rule 25 (relational -> relational LT additive .)
+    SEMICOLON       reduce using rule 25 (relational -> relational LT additive .)
+    THEN            reduce using rule 25 (relational -> relational LT additive .)
+    RPAREN          reduce using rule 25 (relational -> relational LT additive .)
+    MINUS           shift and go to state 43
+    PLUS            shift and go to state 44
 
 
 state 64
 
-    (37) primary -> LPAREN expression RPAREN .
+    (26) relational -> relational GT additive .
+    (28) additive -> additive . MINUS multiplicative
+    (29) additive -> additive . PLUS multiplicative
 
-    TIMES           reduce using rule 37 (primary -> LPAREN expression RPAREN .)
-    DIVIDE          reduce using rule 37 (primary -> LPAREN expression RPAREN .)
-    MINUS           reduce using rule 37 (primary -> LPAREN expression RPAREN .)
-    PLUS            reduce using rule 37 (primary -> LPAREN expression RPAREN .)
-    LTE             reduce using rule 37 (primary -> LPAREN expression RPAREN .)
-    GTE             reduce using rule 37 (primary -> LPAREN expression RPAREN .)
-    LT              reduce using rule 37 (primary -> LPAREN expression RPAREN .)
-    GT              reduce using rule 37 (primary -> LPAREN expression RPAREN .)
-    EQUAL           reduce using rule 37 (primary -> LPAREN expression RPAREN .)
-    NE              reduce using rule 37 (primary -> LPAREN expression RPAREN .)
-    AND             reduce using rule 37 (primary -> LPAREN expression RPAREN .)
-    OR              reduce using rule 37 (primary -> LPAREN expression RPAREN .)
-    SEMICOLON       reduce using rule 37 (primary -> LPAREN expression RPAREN .)
-    THEN            reduce using rule 37 (primary -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 37 (primary -> LPAREN expression RPAREN .)
+    LTE             reduce using rule 26 (relational -> relational GT additive .)
+    GTE             reduce using rule 26 (relational -> relational GT additive .)
+    LT              reduce using rule 26 (relational -> relational GT additive .)
+    GT              reduce using rule 26 (relational -> relational GT additive .)
+    EQUAL           reduce using rule 26 (relational -> relational GT additive .)
+    NE              reduce using rule 26 (relational -> relational GT additive .)
+    AND             reduce using rule 26 (relational -> relational GT additive .)
+    OR              reduce using rule 26 (relational -> relational GT additive .)
+    SEMICOLON       reduce using rule 26 (relational -> relational GT additive .)
+    THEN            reduce using rule 26 (relational -> relational GT additive .)
+    RPAREN          reduce using rule 26 (relational -> relational GT additive .)
+    MINUS           shift and go to state 43
+    PLUS            shift and go to state 44
 
 
 state 65
 
-    (3) declaration -> VARIABLE ID WORTH expression . SEMICOLON
+    (28) additive -> additive MINUS multiplicative .
+    (31) multiplicative -> multiplicative . TIMES unary
+    (32) multiplicative -> multiplicative . DIVIDE unary
 
-    SEMICOLON       shift and go to state 67
+    MINUS           reduce using rule 28 (additive -> additive MINUS multiplicative .)
+    PLUS            reduce using rule 28 (additive -> additive MINUS multiplicative .)
+    LTE             reduce using rule 28 (additive -> additive MINUS multiplicative .)
+    GTE             reduce using rule 28 (additive -> additive MINUS multiplicative .)
+    LT              reduce using rule 28 (additive -> additive MINUS multiplicative .)
+    GT              reduce using rule 28 (additive -> additive MINUS multiplicative .)
+    EQUAL           reduce using rule 28 (additive -> additive MINUS multiplicative .)
+    NE              reduce using rule 28 (additive -> additive MINUS multiplicative .)
+    AND             reduce using rule 28 (additive -> additive MINUS multiplicative .)
+    OR              reduce using rule 28 (additive -> additive MINUS multiplicative .)
+    SEMICOLON       reduce using rule 28 (additive -> additive MINUS multiplicative .)
+    THEN            reduce using rule 28 (additive -> additive MINUS multiplicative .)
+    RPAREN          reduce using rule 28 (additive -> additive MINUS multiplicative .)
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
 
 
 state 66
 
-    (9) if_statement -> IF expression THEN statement .
+    (29) additive -> additive PLUS multiplicative .
+    (31) multiplicative -> multiplicative . TIMES unary
+    (32) multiplicative -> multiplicative . DIVIDE unary
 
-    VARIABLE        reduce using rule 9 (if_statement -> IF expression THEN statement .)
-    DISPLAY         reduce using rule 9 (if_statement -> IF expression THEN statement .)
-    IF              reduce using rule 9 (if_statement -> IF expression THEN statement .)
-    ID              reduce using rule 9 (if_statement -> IF expression THEN statement .)
-    MINUS           reduce using rule 9 (if_statement -> IF expression THEN statement .)
-    NOT             reduce using rule 9 (if_statement -> IF expression THEN statement .)
-    NUMBER          reduce using rule 9 (if_statement -> IF expression THEN statement .)
-    BOOLEAN         reduce using rule 9 (if_statement -> IF expression THEN statement .)
-    LPAREN          reduce using rule 9 (if_statement -> IF expression THEN statement .)
-    STRING          reduce using rule 9 (if_statement -> IF expression THEN statement .)
-    $end            reduce using rule 9 (if_statement -> IF expression THEN statement .)
+    MINUS           reduce using rule 29 (additive -> additive PLUS multiplicative .)
+    PLUS            reduce using rule 29 (additive -> additive PLUS multiplicative .)
+    LTE             reduce using rule 29 (additive -> additive PLUS multiplicative .)
+    GTE             reduce using rule 29 (additive -> additive PLUS multiplicative .)
+    LT              reduce using rule 29 (additive -> additive PLUS multiplicative .)
+    GT              reduce using rule 29 (additive -> additive PLUS multiplicative .)
+    EQUAL           reduce using rule 29 (additive -> additive PLUS multiplicative .)
+    NE              reduce using rule 29 (additive -> additive PLUS multiplicative .)
+    AND             reduce using rule 29 (additive -> additive PLUS multiplicative .)
+    OR              reduce using rule 29 (additive -> additive PLUS multiplicative .)
+    SEMICOLON       reduce using rule 29 (additive -> additive PLUS multiplicative .)
+    THEN            reduce using rule 29 (additive -> additive PLUS multiplicative .)
+    RPAREN          reduce using rule 29 (additive -> additive PLUS multiplicative .)
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
 
 
 state 67
 
-    (3) declaration -> VARIABLE ID WORTH expression SEMICOLON .
+    (31) multiplicative -> multiplicative TIMES unary .
 
-    VARIABLE        reduce using rule 3 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
-    DISPLAY         reduce using rule 3 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
-    IF              reduce using rule 3 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
-    ID              reduce using rule 3 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
-    MINUS           reduce using rule 3 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
-    NOT             reduce using rule 3 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
-    NUMBER          reduce using rule 3 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
-    BOOLEAN         reduce using rule 3 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
-    LPAREN          reduce using rule 3 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
-    STRING          reduce using rule 3 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
-    $end            reduce using rule 3 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
+    TIMES           reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+    DIVIDE          reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+    MINUS           reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+    PLUS            reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+    LTE             reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+    GTE             reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+    LT              reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+    GT              reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+    EQUAL           reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+    NE              reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+    AND             reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+    OR              reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+    SEMICOLON       reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+    THEN            reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+    RPAREN          reduce using rule 31 (multiplicative -> multiplicative TIMES unary .)
+
+
+state 68
+
+    (32) multiplicative -> multiplicative DIVIDE unary .
+
+    TIMES           reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+    DIVIDE          reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+    MINUS           reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+    PLUS            reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+    LTE             reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+    GTE             reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+    LT              reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+    GT              reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+    EQUAL           reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+    NE              reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+    AND             reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+    OR              reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+    SEMICOLON       reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+    THEN            reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+    RPAREN          reduce using rule 32 (multiplicative -> multiplicative DIVIDE unary .)
+
+
+state 69
+
+    (40) primary -> LPAREN expression RPAREN .
+
+    TIMES           reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+    LTE             reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+    GTE             reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+    LT              reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+    GT              reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+    EQUAL           reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+    NE              reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+    AND             reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+    OR              reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+    SEMICOLON       reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+    THEN            reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 40 (primary -> LPAREN expression RPAREN .)
+
+
+state 70
+
+    (5) declaration -> VARIABLE ID WORTH expression . SEMICOLON
+
+    SEMICOLON       shift and go to state 72
+
+
+state 71
+
+    (12) if_statement -> IF expression THEN statement .
+
+    VARIABLE        reduce using rule 12 (if_statement -> IF expression THEN statement .)
+    DISPLAY         reduce using rule 12 (if_statement -> IF expression THEN statement .)
+    IF              reduce using rule 12 (if_statement -> IF expression THEN statement .)
+    LBRAC           reduce using rule 12 (if_statement -> IF expression THEN statement .)
+    ID              reduce using rule 12 (if_statement -> IF expression THEN statement .)
+    MINUS           reduce using rule 12 (if_statement -> IF expression THEN statement .)
+    NOT             reduce using rule 12 (if_statement -> IF expression THEN statement .)
+    NUMBER          reduce using rule 12 (if_statement -> IF expression THEN statement .)
+    BOOLEAN         reduce using rule 12 (if_statement -> IF expression THEN statement .)
+    LPAREN          reduce using rule 12 (if_statement -> IF expression THEN statement .)
+    STRING          reduce using rule 12 (if_statement -> IF expression THEN statement .)
+    $end            reduce using rule 12 (if_statement -> IF expression THEN statement .)
+    RBRAC           reduce using rule 12 (if_statement -> IF expression THEN statement .)
+
+
+state 72
+
+    (5) declaration -> VARIABLE ID WORTH expression SEMICOLON .
+
+    VARIABLE        reduce using rule 5 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
+    DISPLAY         reduce using rule 5 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
+    IF              reduce using rule 5 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
+    LBRAC           reduce using rule 5 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
+    ID              reduce using rule 5 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
+    MINUS           reduce using rule 5 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
+    NOT             reduce using rule 5 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
+    NUMBER          reduce using rule 5 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
+    BOOLEAN         reduce using rule 5 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
+    LPAREN          reduce using rule 5 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
+    STRING          reduce using rule 5 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
+    $end            reduce using rule 5 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
+    RBRAC           reduce using rule 5 (declaration -> VARIABLE ID WORTH expression SEMICOLON .)
 

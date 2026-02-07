@@ -2,21 +2,28 @@ import ply.yacc as yacc
 from environment import Environment
 from verboze_lexer import tokens
 
-env = Environment()
 
 
 
-#
-#
-#
-# def p_block(p):
-#     """block : '{' sequence '}'"""
+
+def p_program(p):
+    """program : sequence"""
+    p[0] = p[1]
+
+def p_block(p):
+    """block : LBRAC sequence RBRAC"""
+    p[0] = p[2]
 
 
 
 def p_sequence(p):
     """sequence : declaration
                 | sequence declaration"""
+    if len(p) == 2:
+        p[0] = [p[1]]
+
+    elif len(p) == 3:
+        p[0] = p[1] + [p[2]]
 
 
 def p_declaration(p):
@@ -25,11 +32,13 @@ def p_declaration(p):
                    | statement"""
 
     if len(p) == 6:
-        env.define(p[2], p[4])
-
+        p[0] = ('DECL', p[2], p[4])
 
     elif len(p) == 4:
-        env.define(p[2], None)
+        p[0] = ('DECL', p[2], None)
+
+    elif len(p) == 2:
+        p[0] = p[1]
 
 
 
@@ -38,28 +47,34 @@ def p_declaration(p):
 def p_statement(p):
     """statement : expression SEMICOLON
                  | DISPLAY expression SEMICOLON
-                 | if_statement"""
+                 | if_statement
+                 | block"""
 
-    if len(p) == 2:
+    if len(p) == 3:
         p[0] = p[1]
 
     elif len(p) == 4:
-        print(p[2])
-        p[0] = None
+        p[0] = ('DISPLAY', p[2])
+
+    if len(p) == 2:
+        p[0] = p[1]
 
 def p_if_statement(p):
     """if_statement : IF expression THEN statement"""
 #                   | IF expression THEN statement ENDTHEN ELSE if_statement"""
     if len(p) == 5:
-        if p[2]:
-            print("here")
-            p[0] = p[4]
+        p[0] = ('IF-STMT', p[2], p[4])
 
-    elif len(p) == 7:
-        if p[2]:
-            p[0] = p[4]
-        else:
-            p[0] = p[7]
+    # if len(p) == 5:
+    #     if p[2]:
+    #         print("here")
+    #         p[0] = p[4]
+    #
+    # elif len(p) == 7:
+    #     if p[2]:
+    #         p[0] = p[4]
+    #     else:
+    #         p[0] = p[7]
 
 
 def p_expression(p):
@@ -70,7 +85,7 @@ def p_assignment(p):
     """assignment : logical_or
                   | ID WORTH assignment"""
     if len(p) == 4:
-        env.assign(p[1], p[3])
+        p[0] = ('ASSIGN', p[1], p[3])
     elif len(p) == 2:
         p[0] = p[1]
 
@@ -182,19 +197,18 @@ def p_error(p):
     print("Syntax error in input!")
 
 
-if __name__ == '__main__':
 
 
 
 
-    # Build the parser
-    parser = yacc.yacc()
+# Build the parser
+parser = yacc.yacc()
 
-    while True:
-       try:
-           s = input('expression : ')
-       except EOFError:
-           break
-       if not s: continue
-       result = parser.parse(s)
-       print("env : ",env.values)
+# while True:
+#    try:
+#        s = input('expression : ')
+#    except EOFError:
+#        break
+#    if not s: continue
+#    result = parser.parse(s)
+#    print("env : ",env.values)

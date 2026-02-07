@@ -48,7 +48,9 @@ tokens = (
     'ID',
     'VARIABLE',
     'WORTH',
-    'STRING'
+    'STRING',
+    'LBRAC',
+    'RBRAC'
 
 )
 
@@ -78,7 +80,8 @@ t_DISPLAY   = r'display '
 t_SEMICOLON = r'\;'
 t_VARIABLE  = r'variable'
 t_WORTH     = r'worth'
-
+t_LBRAC     = r'\{'
+t_RBRAC     = r'\}'
 
 
 # A regular expression rule with some action code
