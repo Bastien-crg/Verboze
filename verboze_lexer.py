@@ -8,15 +8,14 @@ reserved = {
     'while' : 'WHILE',
     'not' : 'NOT',
     'lower' : 'LOWER',
-    'than' : 'THAN',
     'and' : 'AND',
     'or' : 'OR',
     'equal' : 'EQUAL',
     'to' : 'TO',
-    'greater' : 'GREATER',
     'worth' : 'WORTH',
     'variable' : 'VARIABLE',
-    'display' : 'DISPLAY'
+    'display' : 'DISPLAY',
+    'is greater than ' : 'GT'
 
 }
 
@@ -40,9 +39,7 @@ tokens = (
     'AND',          # &
     'OR',           # |
     'IF',
-    # 'ELSEIF',
-    # 'ELSE',
-    'THEN',
+    'ELSE',
     'DISPLAY',
     'SEMICOLON',
     'ID',
@@ -50,7 +47,8 @@ tokens = (
     'WORTH',
     'STRING',
     'LBRAC',
-    'RBRAC'
+    'RBRAC',
+    'COLON'
 
 )
 
@@ -73,15 +71,14 @@ t_NE        = r'\ is\ not\ equal\ to\ '
 t_AND       = r'\ and\ '
 t_OR        = r'\ or\ '
 t_IF        = r'if '
-# t_ELSE      = r'else '
-# t_ELSEIF    = r'else if '
-t_THEN      = r'then '
+t_ELSE      = r'else '
 t_DISPLAY   = r'display '
 t_SEMICOLON = r'\;'
 t_VARIABLE  = r'variable'
 t_WORTH     = r'worth'
 t_LBRAC     = r'\{'
 t_RBRAC     = r'\}'
+t_COLON     = r'\:'
 
 
 # A regular expression rule with some action code
@@ -113,7 +110,7 @@ def t_STRING(t):
 
 
 # A string containing ignored characters (spaces and tabs)
-t_ignore  = ' \t'
+# t_ignore  = ' \t'
 
 # Error handling rule
 def t_error(t):

@@ -41,9 +41,6 @@ def p_declaration(p):
         p[0] = p[1]
 
 
-
-
-
 def p_statement(p):
     """statement : expression SEMICOLON
                  | DISPLAY expression SEMICOLON
@@ -60,10 +57,13 @@ def p_statement(p):
         p[0] = p[1]
 
 def p_if_statement(p):
-    """if_statement : IF expression THEN statement"""
-#                   | IF expression THEN statement ENDTHEN ELSE if_statement"""
+    """if_statement : IF expression COLON statement
+                    | IF expression COLON statement ELSE statement"""
     if len(p) == 5:
         p[0] = ('IF-STMT', p[2], p[4])
+
+    if len(p) == 8:
+        p[0] = ('IF-ELSE-STMT', p[2], p[4], p[7])
 
     # if len(p) == 5:
     #     if p[2]:

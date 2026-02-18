@@ -46,7 +46,8 @@ if __name__ == '__main__':
 
     env = Environment()
     # Example AST generated from the parser
-    ast = parser.parse('if 0 then { variable a worth 2; display "toto";}')
+    # ast = parser.parse('if 1 is greater than 0 : { variable a worth 2; display "toto";}')
+    ast = parser.parse('1 is greater than 0;')
 
 
     for statement in ast:

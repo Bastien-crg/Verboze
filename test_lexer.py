@@ -3,7 +3,7 @@ from verboze_lexer import lexer
 
 # Test it out
 data = '''
-if 1 then display "toto";
+1 is greater than 0;
 '''
 
 # Give the lexer some input
